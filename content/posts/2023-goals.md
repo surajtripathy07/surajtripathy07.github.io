@@ -1,3 +1,9 @@
+---
+layout: post
+title: 2023 Planning
+date: "2023-04-29"
+draft: true
+---
 Hello future self, and people who have way too much time at their hand. This is an attempt by me
 to start getting into the blogging game again. I have given this a lot of try historically, and have
 found it difficult to stick to it. Well I could say that "found it difficult to stick to it", is the story
