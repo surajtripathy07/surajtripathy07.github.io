@@ -1,0 +1,72 @@
+baseURL = "https://surajtripathi.info/"
+title = "Suraj Tripathi"
+theme = "hugo-coder"
+languagecode = "en"
+defaultcontentlanguage = "en"
+enableEmoji=true
+disqusShortname = "surajtripathi-info"
+
+paginate = 20
+
+[markup.highlight]
+style = "github-dark"
+
+[params]
+  author = "Suraj Tripathi"
+  info = "I solve problems using code"
+  description = "Suraj's personal website"
+  keywords = "blog,developer,personal,backend"
+  avatarurl = "images/avatar.png"
+
+  since = 2014
+
+  enableTwemoji = true
+
+  colorScheme = "auto"
+  hidecolorschemetoggle = false
+
+  # customCSS = ["css/custom.css"]
+  # customSCSS = ["scss/custom.scss"]
+  # customJS = ["js/custom.js"]
+
+[taxonomies]
+  category = "categories"
+  series = "series"
+  tag = "tags"
+  author = "authors"
+
+# Social links
+[[params.social]]
+  name = "Github"
+  icon = "fa fa-github fa-2x"
+  weight = 1
+  url = "https://github.com/surajtripathy07"
+[[params.social]]
+  name = "Gitlab"
+  icon = "fa fa-gitlab fa-2x"
+  weight = 2
+  url = "https://gitlab.com/suraj_tripathy"
+[[params.social]]
+  name = "Twitter"
+  icon = "fa fa-twitter fa-2x"
+  weight = 4
+  url = "https://twitter.com/SurajTripathy07/"
+[[params.social]]
+  name = "LinkedIn"
+  icon = "fa fa-2x fa-linkedin"
+  weight = 3
+  url = "https://www.linkedin.com/in/surajtripathi793/"
+
+# Menu links
+[[menu.main]]
+  name = "Blog"
+  weight = 1
+  url  = "posts/"
+[[menu.main]]
+  name = "About"
+  weight = 2
+  url = "about/"
+
+[module]
+[module.hugoVersion]
+min = "0.77.0"
