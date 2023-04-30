@@ -1,22 +1,22 @@
 ---
-layout: page
 title: About
-permalink: /about/
 ---
-I am a Computer Science Professional and have been professionally working since Feb-15. I have worked primarily as a Backend Developer across various techstack Java(J2EE, J2SE), Ruby(ROR), Nodejs, Python, with some exposure to HTML5 and some frontend frameworks.
 
-I live in Mumbai, India with my family (parents and brother). I love travelling and have travelled across India.. Wish to travel other countries and learn about other cultures. 
+Building Products using code since 2015. I think of myself as a generalist
+in terms of language and technology. I have professionally worked with
+Java(J2EE), Ruby(ROR), Python(Django), Nodejs(Express), Objective-C, Android.
 
-In my spare time I Like,
-1. Listening to AudioBooks 
-2. Watching movies
-3. Video Games(PS4)
-4. Chess (Lichess profile: [MrApathyJurist](https://lichess.org/@/MrApathyJurist))
-5. Reading
+I have worked in a small team startup and have seen it grow into a big
+corporation. I have a keen eye for the end product and work really well when 
+paired with a Product Manager. I have managed a team of junior developers for
+a year. 
+
+When I am not working on code, I am a happy husband and father. I love to listen
+to audiobooks in my spare time. I like playing chess, though I do try to keep it
+within limits of 15 minutes per day. I mostly play bullet chess. 
 
 ### Contact me
 Send me an email to get in touch or give me a feedback!
 
-* Gmail: [surajtripathi793@gmail.com](mailto:surajtripathi793@gmail.com), [tripathy.suraj0704@gmail.com](mailto:tripathy.suraj0704@gmail.com)
+Gmail: surajtripathi793@gmail.com, tripathy.suraj0704@gmail.com
 
-Or follow through the below social network icons to connect via them!
