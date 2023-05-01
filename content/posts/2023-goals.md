@@ -20,22 +20,36 @@ up becoming quiet a big draft. I did create a goal for myself in 2022, but 2022
 wasn't a "normal" year for me. So most of the plans of 2022 either got
 discarded, or someone(a wailing someone) stole the thunder and prioirity for
 most of the year.  Having checked off mariage, changing a job, baby, buying an
-apartment all in the span of 15 months has been quiet a ride, and I have mostly
-stumbled my way across most of the decisions. It would be nice to have a plan
-again, and it would be nice if I could try and have some measure of
-predictability in the upcoming year. I think it would be nice to break my
-aspirations into various buckets.
+apartment all in the span of 15 months, I find that it has been quiet a ride,
+and I have mostly stumbled my way across most of the decisions. 
+It would be nice to have a plan again, and it would be nice if I could try and
+have some measure of predictability in the upcoming year. I think it would be
+nice to break my aspirations into various buckets.
 
 So I have broadly the following roles Professional, Parent, Personal, Spouse. 
 
-As a Professional:
+### Professional
 
 I first need to identify the metric over which I want to work. The relevant
 metric at my current job is number of MR's per month. IMO that is a decent
 metric. But that can't be the only metric. At a conventional company the Story
 point that you close in a Sprint is also a good metric, to really encapsulate 
 your effectiveness. But the nature of work within my team makes it so that there 
-is not standardization between the weights. Its pretty consistent until the 
+is no standardization between the weights. Its pretty consistent until the 
 weights are 1 or 2 but as soon as the weight per issue starts to scale the 
 consistency starts to drop. And most issues tend to be 3 or above. 
+There is another daily metric which is the number of "Activity" and while that
+isn't linked officially to any performance, it isn't difficult to observe that
+high impact individuals end up having very high "Activity" per day. Their
+activity graph is very dark. 
+So the leading metric for my Professional work are
+1. Activity (target 30+ daily)
+2. MRs/month (target 15/month)
+
+The numbers taken here are aspirational and so are "moon-shots" and I would have
+to find my current numbers and have subgoals per month to try and move the
+metric to the goal state.
+
+### Personal
+
 
