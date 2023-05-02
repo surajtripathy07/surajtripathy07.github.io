@@ -1,7 +1,6 @@
 --- 
 title: 2023 Planning 
 date: "2023-04-29" 
-draft: true 
 --- 
 
 Hello future self, and people who have way too much time at their hand.  This is
@@ -26,7 +25,7 @@ It would be nice to have a plan again, and it would be nice if I could try and
 have some measure of predictability in the upcoming year. I think it would be
 nice to break my aspirations into various buckets.
 
-So I have broadly the following roles Professional, Parent, Personal, Spouse. 
+So I have broadly the following roles Professional, Personal, Family man
 
 ### Professional
 
@@ -52,4 +51,84 @@ metric to the goal state.
 
 ### Personal
 
+I tend to be an over ambitions person while putting forward any goals for
+myself. In the past I've had multiple scenarios where I've taken more than I can
+chew on my plate, and consequently failed to achieve anything. But keeping in
+mind the "doing better next time" idea, here we go again.
 
+I wish to listen to atleast 15 books thoughout the year. I am not really fussed
+about the gener of book. I tend to listen to a bunch of fiction and then jump to
+non-fiction books which I go through 2 in a row and after that point I stop.
+Until I start listening to fiction again. Just like most things in life, my
+audiobook journey is a cycle. Since January I have finished the entire FirstLaw
+Trilogy, Sharp Ends, Red Country, and one parenting book 'How to raise
+successful people'. I am currently parallely listening to 2 non fiction books,
+'Deep work' and 'The art of Impossible'. I have 'The lean product Playbook' and
+'The staff engineers path' in my list so its safe to say this goal is going
+very well in the right direction.
+
+I wish to write a bunch as well, this plan is in line with that. If I end up
+writing 24 posts by the end of the year on on any topic, I will count this goal
+as a success.
+
+On the personal software development front, I've not spent lots of time building
+personal products even though I feel I would be fairly good at it.  In my head
+building personal software products has always been associated to monetizing the
+said software to make money. And that has limited me from trying a lot of "fun"
+ideas that I've had over the years. Hoping that admitting this hear will make me
+realize how that thinking has been a limiting factor in what could have been an
+arsnel of products which could have been a lot of fun! So this year, I am going
+to build atleast 2 indie software products. There are lots of ideas in my head
+and I have already started working on one. If I launch two products this year, I
+will consider this goal as a success.
+
+After we move to the new apartment which I dont see happening until end of May,
+I wish to make use of the Gym in the society on a regular basis. But going to
+the gym isn't a goal in itself. As I dont really feel jacking up with muscles is
+really something that excites me, I wish to go towards the cardio and flexibilty
+end of working out. Right now I can't run for more than few minutes without
+losing my shit(sigh :p). I wish to be able to run atleast 30 minutes straight
+(baby steps :p), so if by the end of the year I can run 30 minutes straight
+without feeling like my heart is going to jump out of my chest after I've done
+it, I'll consider that a success. Where as on the flexibility front, I've done a
+bunch of yoga last year along with Nimisha during our pregnancy. And while doing
+that my flexibility had increased, I could touch my palm on the ground while
+keeping my knees straight. Having stopped yoga since Karan's birth, I am back to
+the point where the maximum I can reach with a straight knee is my shin. Without
+being over ambitious I will be happy to reach to that level of flexibility
+again. Knowing myself I do need to have a "continuity" goal as well, else I will
+start skipping gym convincing myself that I will be able to achieve the goals
+even if I start 2 months before dead line(story of my life). So as long as I
+have gone to the Gym 160 times in the next year, I will consider this goal
+successful. I will have to think about how I track my visits to the gym though.
+
+For someone with a keen eye, they would have noticed that most of the above
+"personal" goals dont have a leading metric. By that I mean there is no metric
+(besides probably the gym visits) that suggests that I am working towards the
+goals. There are only lagging metrics i.e the final output. Maybe adding the
+leading metric for the above will be a different post.
+
+### Family man
+
+As a family man what are the metrics that I should try and "optimize"? Maybe
+thats just an engineer looking at a normal life and trying to figure out which
+KPI matters the most. This is my first time thinking about this role, for most
+of my life I have not had to think about others while thinking about my
+next year. But this time I do, I have a wife and a small baby both of whom
+expect somethings from me. And the expectations and satisfactions from them
+aren't as objective as lets say MR's/month. Spending quality time with them is a
+good leading indicator. But how much time is "quality" time?
+Without overthinking this alot I think:
+1. One vacation
+2. Two birthday parties
+3. Atleast one Date night every month
+4. Baby duty after I am home and on Sundays
+5. One shared activity/workout?
+
+Maybe also add them to the medical insurance :p
+
+I think the above sounds like a good plan for the comming year. I need to have
+atleast quaterly checkins to ensure progress and course correction. The next
+retrospective should be in July 2023. I will post an update!
+
+Thank you for reading!
