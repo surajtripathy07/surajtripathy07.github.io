@@ -1,7 +1,7 @@
 ---
 title: "Procastination, Todo list and Digital wellbeing"
 date: "2023-05-14"
-draft: true
+tags: [unpolished]
 ---
 
 ## Procrastination and Me
@@ -98,5 +98,93 @@ memes, or chating with some friends or helping others figure their task out.
 I also realized that I was spending upwards of 5 hours per day on my phone. I was
 spending hours playing Chess. I was spending hours browsing youtube and
 instagram. I used Android's Digital wellbeing to get the statistics. 
-I also needed to solve my priortization problem, so I started using a dedicated
-Todolist.
+So I was wasting time using my phone as my primary source of distraction. I
+thought that maybe working on my distraction will make me more focused and in
+turn will solve even the 1st problem.
+
+## Digital Wellbeing
+
+Android has a very awesome feature called Digital Wellbeing. It allows you to
+monitor and even control the time you spend on your phone. You can use it to
+limit the amount of time you can open an app, and also use it to disable apps
+all together during specific windows or after certain minutes/hours of usage.It
+wasn't an easy change, my mind would rebell against myself. My phone usage had 
+become a habit. I had to resist my urge to disable the settings all together. I
+realized that after blocking apps I was spending more and more time on websites,
+where even though my phone usage had dropped but I was still spending
+significant time on my phone. After some changes I started using this feature
+even on websites, no more 9gag for me after 20 mins, no more Hackernews for me
+after 15 minutes, no more Google news after 10 minutes. I felt like a tyrant to
+myself, but I reasoned that it is self dicipline. After some months I realized
+my habits had changed, I wasn't spending so many hours on my phone, I even
+removed the entire thing once my phone changed only to find that slipping into
+those bad habits is very easy, so I added back the limitations. I started using
+this feature primarily to limit unwanted usage during office hours. But having
+used it for over four years, I think I am now a power user of the feature, and
+I also use it to limit my phone usage after I am home and to ensure I am not
+obsessively checking my Emails, or to ensure I dont stay on my phone post 11pm.
+
+## Todo
+
+But the important question was, did the Digital wellbeing really solve my
+procrastination problem? Not entirely, I hoped that removing distractings would
+solve both my problems, and to some extent it did, but I had to still work on the
+bigger problem of priortization. Because of my Digital control, I started having
+more and more focused hours. I started getting more work done during those
+times, but there were still sometimes where I would not work on the task at
+hand. I understood that the reason for that was lack of clarity and no clear
+direction of execution. I was convinced that I had to establish a routine and
+"define" it to remove ambiguity from my day to day priortization. After some
+trial and error over a period of months, I came up with the following execution
+paradim. 
+
+I realized that my work usually has 3 stages to it.
+1. Unknown: These tasks require doing but are unbounded. It is unrestricted and
+unkown. The scope is not clear. It involves research and is not straightforward. 
+Sometimes it might involve defining the problem itself.
+2. Straightforward: These are task that are just execution. Well defined and
+known. These are task you could spell out for someone to do.
+3. Monitor/Discussion
+
+I realized I procrastinated the most on the `Unknowns`, so I decided that every
+day I will spend the first few hours on the Unknowns. I will try to define them,
+break them, scope them into either smaller `Unknowns` or `Straightforwards`. If
+I need to collaborate with someone to figure it out, I would work on it till I
+can independantly and move it to `Monitor/Discuss`. After the first few hour(2
+hours in my case) of this. I move my energy to Straightforward, and because of
+the nature of work here, these get curned without much thought. This is pure
+execution, with very less problem solving. Between multiple `Unknowns` I always
+pick the one which I feel is the most important for today, unless explicity
+priority has been defined by the stakeholders.
+
+At the end of the day during meetings and discussions I will update the tasks
+in my `Monitor/Discussion` section and move them back to either `Unknown` or
+`Straightforward`
+
+Here is a sample Todo list categorization which I use
+```
+## Order of execution
+
+1. First work on the Unknowns and try to move them to **Straightforward** or **Monitor/Wait for Reply**
+2. Then work on **Straightforward** and move them to **Wait for Reply**
+
+### Unknown 🎯🌀
+- [ ] Superbase vs Firebase, or Native Server?
+- [ ]
+
+### Straightforward 🎯
+- [ ] Fix StandardError during Storage limit breach
+- [ ]
+
+### Monitor/Wait for Reply 🏓
+```
+
+## Results
+
+The above approach has helped me get focused and avoid procrastination by
+defining a routine to approach my work daily. It is still a Work in Progress but
+I have reduced the amount of time I ended up spending browsing the web because
+of lack of focus. I have not stopped using social media all together, I have
+just defined a place and time where I intend to do just that, as opposed to
+doing it every other minute of the day. It has increased my overall personal
+satisfaction from my work and my leasure! 
