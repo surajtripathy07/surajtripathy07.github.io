@@ -8,4 +8,4 @@ Posts
 7. ChatGPT and What could future software developers look like?
 8. The Big5 character profile
 9. TRICK and my take on it
-10. 
+10. India, the past, the present, the future from my POV
