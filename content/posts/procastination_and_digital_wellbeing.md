@@ -1,7 +1,8 @@
-title: Procastination, Todo list and Digital wellbeing
+---
+title: "Procastination, Todo list and Digital wellbeing"
 date: 14th May 2023
 draft: true
-________
+---
 
 ## Procrastination and Me
 
