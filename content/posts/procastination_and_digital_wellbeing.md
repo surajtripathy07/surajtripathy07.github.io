@@ -1,6 +1,6 @@
 ---
 title: "Procastination, Todo list and Digital wellbeing"
-date: 14th May 2023
+date: "2023-05-14"
 draft: true
 ---
 
