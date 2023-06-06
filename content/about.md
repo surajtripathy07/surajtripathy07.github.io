@@ -11,5 +11,5 @@ I've worked in both small startups and large corporations, and I've seen the pro
 When I'm not coding, I'm a happy husband and father. I love listening to audiobooks in my spare time. I also enjoy playing chess.
 
 If you want to connect, let's chat!
-Gmail: surajtripathi793@gmail.com, tripathy.suraj0704@gmail.com
+Gmail: surajtripathi793@gmail.com
 
