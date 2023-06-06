@@ -2,21 +2,14 @@
 title: About
 ---
 
-Building Products using code since 2015. I think of myself as a generalist
-in terms of language and technology. I have professionally worked with
-Java(J2EE), Ruby(ROR), Python(Django), Nodejs(Express), Objective-C, Android.
+Hi! I'm Suraj, a code ninja who loves building products.
 
-I have worked in a small team startup and have seen it grow into a big
-corporation. I have a keen eye for the end product and work really well when 
-paired with a Product Manager. I have managed a team of junior developers for
-a year. 
+I've been coding since 2015 and have worked with a variety of languages and technologies, including Java, Ruby, Python, Nodejs, Objective-C, and Android. I'm a generalist, so I'm always up for learning new things.
 
-When I am not working on code, I am a happy husband and father. I love to listen
-to audiobooks in my spare time. I like playing chess, though I do try to keep it
-within limits of 15 minutes per day. I mostly play bullet chess. 
+I've worked in both small startups and large corporations, and I've seen the product development process from start to finish. I have a keen eye for the end product and work well with Product Managers and Designers. I've also managed a team of junior developers for a year.
 
-### Contact me
-Send me an email to get in touch or give me a feedback!
+When I'm not coding, I'm a happy husband and father. I love listening to audiobooks in my spare time. I also enjoy playing chess.
 
+If you want to connect, let's chat!
 Gmail: surajtripathi793@gmail.com, tripathy.suraj0704@gmail.com
 
