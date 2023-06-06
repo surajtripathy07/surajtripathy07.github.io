@@ -1,6 +1,6 @@
 --- 
 title: Evolution of HTTP
-date: "2023-05-06" 
+date: "2023-06-06" 
 --- 
 
 The Hypertext Transfer Protocol (HTTP) is the foundation of the World Wide Web. It is the language that web browsers and web servers use to communicate with each other. HTTP has come a long way since its humble beginnings in 1989. In this article, we will take a look at the evolution of HTTP and how it has shaped the way we use the internet.
