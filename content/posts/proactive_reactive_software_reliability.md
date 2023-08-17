@@ -1,7 +1,7 @@
- ---
- title: Proactive vs. Reactive Software Reliability: Orchestrating Resilience Through Metrics and Monitoring
+---
+ title: Proactive vs. Reactive Software Reliability
  date: "2023-08-17"
- ---
+---
 
 In the dynamic landscape of software engineering, reliability is the cornerstone of user satisfaction. To achieve this, two distinct strategies come into play: proactive and reactive measures. However, a crucial ingredient often overlooked in the reliability recipe is the role of metrics and monitoring. Let's delve into how the right metrics, coupled with proactive and reactive strategies, can amplify the reliability of your software systems.
 
