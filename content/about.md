@@ -8,6 +8,8 @@ I've been coding since 2015 and have worked with a variety of languages and tech
 
 I've worked in both small startups and large corporations, and I've seen the product development process from start to finish. I have a keen eye for the end product and work well with Product Managers and Designers. I've also managed a team of junior developers for a year.
 
+I also create digital content on [Instagram](https://www.instagram.com/whimsicallearnings/) and [Youtube](https://youtube.com/@whimsicallearnings?si=2jbHUO5joFHIq2ns)
+
 When I'm not coding, I'm a happy husband and father. I love listening to audiobooks in my spare time. I also enjoy playing chess.
 
 If you want to connect, let's [Chat](mailto:surajtripathi793@gmail.com)!
