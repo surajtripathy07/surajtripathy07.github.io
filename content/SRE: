@@ -1,0 +1,69 @@
+SRE:
+
+1. What does an SRE engineer usually do? Not just at Gitlab but anywhere?
+2. What is the most unorganized SRE setup you've worked in?
+3. What is the most structured and best SRE setup you've worked in?
+4. For a young company, when would dedicated SRE roles come into picture?
+
+5. Most crazy incident you've worked on?
+6. How tools are used to get a lot of things done before hand?
+7. Is there a process during an incident?
+8. How does uptime work for Gitlab?
+9. How does Retro work? Does it every happen that Retro items are not picked up?
+   How does priority management happen for retro related action items?
+
+
+SRE is different for different companies and 
+
+Infra is split in 2 dep, Platform + Reliability
+
+Platform: Scalability(product error budgets, redis experts, db scale), Dedicated
+	Gitlab Dedicated Reliability: Pipelineling, automation
+
+	SelfHosted and now Dedicated
+
+	Delivry, SRE: How deployments on Gitlab.com and dedicated. And infra related to deployemnts
+
+Reliability: Focused on Gitlab.com
+	DB Teams
+	DB Reliability Engineers (postgres internals)
+	SRE has focus on Ansible
+
+PD: on-call rotation for 1 week
+3 rotations
+
+Only SRE organization, 
+
+Ideal situation is where every service 
+Navigation is a problem
+
+Crazy incidents:
+1. A month in, a terraform change --> Locking ourself out of GCP
+Gitly server was deleted
+
+1- Automation
+Kubernetes helps alot
+
+Delete a gitly node --> create snapshot after
+
+Wall Technology
+
+FCL Feature change lock
+
+On monthly basis
+--> no automation on rollbacks
+Need to do Isolations 
+Gitlab 
+
+CorrectiveActions -> InfraDev issue
+
+The priority is like Security issue
+
+Availibility: Latency, ErrorRatio, Weighted Components are bubbled up
+
+SLA would be different for Dedicated
+
+SLA: 99.8
+
+SLO:99.95%
+
