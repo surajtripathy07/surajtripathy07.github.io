@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mumbai Circuit Planner — Low-Traffic Drive Loops</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0b0d0e;
+    --paper:#f4efe6;
+    --accent:#e8471f;
+    --road:#1a1a1a;
+    --muted:#6a665e;
+    --line:#d9d2c4;
+    --good:#2d7a3e;
+    --warn:#c98c16;
+    --bad:#c33a1f;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:'Fraunces',serif;
+    background:var(--paper);
+    color:var(--ink);
+    display:grid;
+    grid-template-columns:380px 1fr;
+    overflow:hidden;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(232,71,31,0.04) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(11,13,14,0.03) 0%, transparent 50%);
+  }
+  @media (max-width:900px){
+    body{grid-template-columns:1fr;grid-template-rows:auto 1fr}
+  }
+
+  /* ─── Sidebar ─── */
+  aside{
+    background:var(--paper);
+    border-right:1px solid var(--line);
+    display:flex;flex-direction:column;
+    height:100vh;
+    overflow-y:auto;
+  }
+  .masthead{
+    padding:28px 28px 20px;
+    border-bottom:2px solid var(--ink);
+    position:relative;
+  }
+  .masthead::after{
+    content:'';position:absolute;bottom:-6px;left:0;right:0;height:1px;background:var(--ink);
+  }
+  .kicker{
+    font-family:'JetBrains Mono',monospace;
+    font-size:10px;letter-spacing:0.2em;text-transform:uppercase;
+    color:var(--accent);margin-bottom:6px;
+  }
+  h1{
+    font-family:'Fraunces',serif;
+    font-weight:800;font-size:32px;line-height:0.95;
+    letter-spacing:-0.02em;font-style:italic;
+  }
+  h1 span{font-style:normal;font-weight:400}
+  .dek{
+    font-size:13px;color:var(--muted);margin-top:10px;line-height:1.4;
+  }
+
+  .form{padding:24px 28px;flex:1}
+  .field{margin-bottom:20px}
+  label{
+    display:block;
+    font-family:'JetBrains Mono',monospace;
+    font-size:10px;letter-spacing:0.15em;text-transform:uppercase;
+    color:var(--muted);margin-bottom:8px;
+  }
+  input,select{
+    width:100%;
+    background:transparent;
+    border:none;
+    border-bottom:1.5px solid var(--ink);
+    padding:6px 0;
+    font-family:'Fraunces',serif;
+    font-size:18px;
+    color:var(--ink);
+    outline:none;
+    transition:border-color 0.2s;
+  }
+  input:focus,select:focus{border-bottom-color:var(--accent)}
+  input::placeholder{color:var(--muted);font-style:italic}
+
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+
+  .input-row{display:flex;align-items:flex-end;gap:8px;border-bottom:1.5px solid var(--ink)}
+  .input-row input{border-bottom:none;flex:1}
+  .input-row input:focus{border-bottom:none}
+  .input-row:focus-within{border-bottom-color:var(--accent)}
+
+  .icon-btn{
+    background:transparent;border:none;
+    padding:6px 4px;cursor:pointer;color:var(--ink);
+    display:flex;align-items:center;justify-content:center;
+    transition:color 0.2s;
+  }
+  .icon-btn:hover{color:var(--accent)}
+  .icon-btn.loading svg{animation:spin 1s linear infinite}
+
+  .time-row{
+    display:grid;grid-template-columns:1fr 1fr auto;gap:10px;align-items:end;
+  }
+  .pill-btn{
+    background:var(--ink);color:var(--paper);
+    border:none;padding:8px 14px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:10px;letter-spacing:0.15em;text-transform:uppercase;
+    cursor:pointer;transition:background 0.15s;
+    height:32px;
+  }
+  .pill-btn:hover{background:var(--accent)}
+
+  .hint{
+    font-family:'JetBrains Mono',monospace;
+    font-size:10px;color:var(--muted);
+    margin-top:6px;letter-spacing:0.05em;
+    min-height:14px;
+  }
+  .hint.success{color:var(--good)}
+  .hint.error{color:var(--bad)}
+
+  .mode-toggle{
+    display:grid;grid-template-columns:1fr 1fr;
+    border:1.5px solid var(--ink);
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;letter-spacing:0.1em;text-transform:uppercase;
+    margin-top:4px;
+  }
+  .mode-toggle button{
+    background:transparent;border:none;padding:10px;
+    font-family:inherit;font-size:inherit;letter-spacing:inherit;
+    cursor:pointer;color:var(--ink);
+    transition:all 0.2s;
+  }
+  .mode-toggle button.active{background:var(--ink);color:var(--paper)}
+  .mode-toggle button:first-child{border-right:1.5px solid var(--ink)}
+
+  .go-btn{
+    width:100%;
+    background:var(--accent);
+    color:var(--paper);
+    border:none;
+    padding:16px;
+    font-family:'Fraunces',serif;
+    font-weight:600;font-size:18px;font-style:italic;
+    cursor:pointer;
+    margin-top:8px;
+    position:relative;
+    transition:transform 0.1s;
+  }
+  .go-btn:hover{transform:translateY(-2px)}
+  .go-btn:active{transform:translateY(0)}
+  .go-btn:disabled{background:var(--muted);cursor:not-allowed;transform:none}
+  .go-btn::after{
+    content:'→';
+    position:absolute;right:20px;top:50%;transform:translateY(-50%);
+    font-style:normal;
+  }
+
+  /* ─── Results ─── */
+  .results{
+    padding:20px 28px;
+    border-top:1px solid var(--line);
+    display:none;
+  }
+  .results.show{display:block}
+  .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-bottom:20px}
+  .stat{
+    padding:14px 0;
+    border-right:1px solid var(--line);
+    padding-right:16px;
+  }
+  .stat:last-child{border-right:none;padding-left:16px;padding-right:0}
+  .stat-label{
+    font-family:'JetBrains Mono',monospace;
+    font-size:9px;letter-spacing:0.15em;text-transform:uppercase;
+    color:var(--muted);margin-bottom:4px;
+  }
+  .stat-value{
+    font-family:'Fraunces',serif;
+    font-size:28px;font-weight:800;line-height:1;letter-spacing:-0.02em;
+  }
+  .stat-value small{font-size:14px;font-weight:400;color:var(--muted)}
+
+  .traffic-score{
+    padding:12px 16px;border:1.5px solid;margin-bottom:16px;
+    font-family:'JetBrains Mono',monospace;font-size:11px;
+    display:flex;justify-content:space-between;align-items:center;
+    text-transform:uppercase;letter-spacing:0.1em;
+  }
+  .traffic-score.good{border-color:var(--good);color:var(--good)}
+  .traffic-score.warn{border-color:var(--warn);color:var(--warn)}
+  .traffic-score.bad{border-color:var(--bad);color:var(--bad)}
+
+  .variant-list{display:flex;flex-direction:column;gap:8px;margin-top:16px}
+
+  .nav-btn{
+    width:100%;
+    background:var(--ink);
+    color:var(--paper);
+    border:none;
+    padding:14px;
+    font-family:'Fraunces',serif;
+    font-weight:600;font-size:16px;
+    cursor:pointer;
+    margin:16px 0 8px;
+    display:flex;align-items:center;justify-content:center;gap:10px;
+    transition:background 0.15s;
+  }
+  .nav-btn:hover{background:var(--accent)}
+  .nav-btn svg{transition:transform 0.2s}
+  .nav-btn:hover svg{transform:translateX(2px) translateY(-2px)}
+  .variant{
+    padding:12px 14px;
+    border:1px solid var(--line);
+    cursor:pointer;
+    transition:all 0.15s;
+    display:flex;justify-content:space-between;align-items:center;
+  }
+  .variant:hover{border-color:var(--ink)}
+  .variant.selected{border-color:var(--accent);border-width:2px;background:rgba(232,71,31,0.04)}
+  .variant-name{font-size:15px;font-weight:600}
+  .variant-stats{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)}
+
+  /* ─── Map ─── */
+  main{position:relative}
+  #map{width:100%;height:100vh;background:#e8e4da}
+
+  .map-overlay{
+    position:absolute;bottom:24px;left:24px;
+    font-family:'JetBrains Mono',monospace;font-size:10px;
+    color:var(--ink);background:var(--paper);
+    padding:8px 12px;border:1px solid var(--ink);
+    letter-spacing:0.1em;text-transform:uppercase;
+    pointer-events:none;
+  }
+
+  .loader{
+    position:absolute;inset:0;
+    background:rgba(244,239,230,0.9);
+    display:none;
+    align-items:center;justify-content:center;
+    flex-direction:column;gap:16px;
+    z-index:10;
+  }
+  .loader.show{display:flex}
+  .loader-spinner{
+    width:40px;height:40px;border:3px solid var(--line);
+    border-top-color:var(--accent);border-radius:50%;
+    animation:spin 0.8s linear infinite;
+  }
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .loader-text{
+    font-family:'JetBrains Mono',monospace;font-size:11px;
+    letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);
+  }
+
+  .api-banner{
+    background:#fff8e6;border-bottom:1px solid var(--warn);
+    padding:14px 28px;font-size:12px;color:#6a5416;
+    font-family:'JetBrains Mono',monospace;
+  }
+  .api-banner-row{
+    display:flex;gap:8px;align-items:center;flex-wrap:wrap;
+  }
+  .api-banner-row span{flex-shrink:0}
+  .api-banner-row input{
+    flex:1;min-width:180px;
+    background:#fff;border:1px solid #c9b89a;
+    padding:6px 10px;font-family:inherit;font-size:11px;
+    color:var(--ink);outline:none;
+  }
+  .api-banner-row input:focus{border-color:var(--accent)}
+  .api-banner-row button{
+    background:var(--ink);color:var(--paper);
+    border:none;padding:7px 14px;
+    font-family:inherit;font-size:10px;letter-spacing:0.1em;
+    text-transform:uppercase;cursor:pointer;
+  }
+  .api-banner-row button:hover{background:var(--accent)}
+  .api-banner-hint{
+    margin-top:8px;font-size:10px;opacity:0.7;letter-spacing:0.05em;
+  }
+  .api-banner.hidden{display:none}
+
+  .error-msg{
+    background:#fde8e3;border:1px solid var(--bad);
+    padding:12px;margin-top:12px;font-size:13px;color:var(--bad);
+  }
+</style>
+</head>
+<body>
+
+<aside>
+  <div class="masthead">
+    <div class="kicker">— Mumbai Circuit Planner ——</div>
+    <h1>Drive <span>in</span> loops<span>,</span><br>not <span>in</span> <em>jams</em>.</h1>
+    <p class="dek">Pick a distance or duration. We'll find a low-traffic loop that brings you home, predicted for your chosen time.</p>
+  </div>
+
+  <div id="apiBanner" class="api-banner">
+    <div class="api-banner-row">
+      <span>🔑 Paste your Google Maps API key:</span>
+      <input type="text" id="apiKeyInput" placeholder="AIzaSy..." autocomplete="off">
+      <button type="button" id="apiKeyBtn">Load map</button>
+    </div>
+    <div class="api-banner-hint">Needs: Maps JavaScript, Directions, Geocoding, Places APIs enabled. Stored locally in your browser.</div>
+  </div>
+
+  <div class="form">
+    <div class="field">
+      <label>① Start / end point</label>
+      <div class="input-row">
+        <input type="text" id="origin" placeholder="e.g. Bandra West, Mumbai" value="Bandra West, Mumbai">
+        <button type="button" class="icon-btn" id="geoBtn" title="Use my current location">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2"/></svg>
+        </button>
+      </div>
+      <div class="hint" id="geoHint"></div>
+    </div>
+
+    <div class="field">
+      <label>② Plan by</label>
+      <div class="mode-toggle">
+        <button type="button" class="active" data-mode="distance">Distance</button>
+        <button type="button" data-mode="duration">Duration</button>
+      </div>
+    </div>
+
+    <div class="field" id="distanceField">
+      <label>Target loop distance (km)</label>
+      <input type="number" id="distance" min="10" max="200" value="40" step="5">
+    </div>
+
+    <div class="field" id="durationField" style="display:none">
+      <label>Target drive time (hrs)</label>
+      <input type="number" id="duration" min="0.5" max="6" value="1.5" step="0.5">
+    </div>
+
+    <div class="field">
+      <label>③ Departure</label>
+      <div class="time-row">
+        <input type="date" id="date">
+        <input type="time" id="time" value="06:00">
+        <button type="button" class="pill-btn" id="nowBtn" title="Set to now">Now</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>④ Direction preference</label>
+      <select id="direction">
+        <option value="auto">Auto — pick least traffic</option>
+        <option value="N">Head North</option>
+        <option value="E">Head East</option>
+        <option value="S">Head South</option>
+        <option value="W">Head West</option>
+        <option value="NE">Northeast (toward Thane)</option>
+        <option value="NW">Northwest (toward coast)</option>
+      </select>
+    </div>
+
+    <button class="go-btn" id="planBtn">Plan the loop</button>
+    <div id="errorBox"></div>
+  </div>
+
+  <div class="results" id="results">
+    <div class="traffic-score" id="trafficScore">
+      <span>Traffic delay</span>
+      <span id="trafficDelayText">—</span>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat">
+        <div class="stat-label">Distance</div>
+        <div class="stat-value" id="statDist">—<small>km</small></div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Drive time</div>
+        <div class="stat-value" id="statTime">—<small>min</small></div>
+      </div>
+    </div>
+
+    <button class="nav-btn" id="navBtn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+      Open in Google Maps
+    </button>
+
+    <div>
+      <label style="margin-bottom:12px">Alternative routes</label>
+      <div class="variant-list" id="variantList"></div>
+    </div>
+  </div>
+</aside>
+
+<main>
+  <div id="map"></div>
+  <div class="map-overlay" id="mapOverlay">Ready — enter details →</div>
+  <div class="loader" id="loader">
+    <div class="loader-spinner"></div>
+    <div class="loader-text" id="loaderText">Calculating routes…</div>
+  </div>
+</main>
+
+<script>
+  // ====== CONFIG ======
+  // API key is entered via the input at the top of the page.
+  // It's stored in your browser's localStorage so you don't re-enter each time.
+  let API_KEY = localStorage.getItem('gmaps_api_key') || "";
+  // ====================
+
+  let map, directionsService, directionsRenderer, geocoder;
+  let originLatLng = null;
+  let currentMode = 'distance';
+  let computedVariants = [];
+  let selectedVariantIdx = 0;
+
+  // Pre-fill input if we have a saved key
+  if (API_KEY) {
+    document.getElementById('apiKeyInput').value = API_KEY;
+  }
+
+  // Load map when user clicks "Load map" button
+  document.getElementById('apiKeyBtn').addEventListener('click', () => {
+    const key = document.getElementById('apiKeyInput').value.trim();
+    if (!key) {
+      alert('Enter an API key first');
+      return;
+    }
+    localStorage.setItem('gmaps_api_key', key);
+    API_KEY = key;
+    loadGoogleMaps();
+  });
+
+  // Also load on Enter key
+  document.getElementById('apiKeyInput').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') document.getElementById('apiKeyBtn').click();
+  });
+
+  // Set default date to next Sunday
+  (function setDefaultDate() {
+    const d = new Date();
+    const daysUntilSunday = (7 - d.getDay()) % 7 || 7;
+    d.setDate(d.getDate() + daysUntilSunday);
+    document.getElementById('date').value = d.toISOString().split('T')[0];
+  })();
+
+  // Mode toggle
+  document.querySelectorAll('.mode-toggle button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.mode-toggle button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentMode = btn.dataset.mode;
+      document.getElementById('distanceField').style.display = currentMode === 'distance' ? 'block' : 'none';
+      document.getElementById('durationField').style.display = currentMode === 'duration' ? 'block' : 'none';
+    });
+  });
+
+  // "Now" button — set date/time to current moment + 2 min buffer
+  // (Google traffic prediction needs future time; 2 min buffer avoids edge cases)
+  document.getElementById('nowBtn').addEventListener('click', () => {
+    const now = new Date(Date.now() + 2 * 60 * 1000);
+    // Format as local YYYY-MM-DD and HH:MM (not UTC)
+    const pad = n => String(n).padStart(2, '0');
+    document.getElementById('date').value =
+      `${now.getFullYear()}-${pad(now.getMonth()+1)}-${pad(now.getDate())}`;
+    document.getElementById('time').value =
+      `${pad(now.getHours())}:${pad(now.getMinutes())}`;
+  });
+
+  // Share location — use browser geolocation
+  document.getElementById('geoBtn').addEventListener('click', () => {
+    const hint = document.getElementById('geoHint');
+    const btn = document.getElementById('geoBtn');
+
+    if (!navigator.geolocation) {
+      hint.textContent = 'Geolocation not supported in this browser';
+      hint.className = 'hint error';
+      return;
+    }
+
+    btn.classList.add('loading');
+    hint.textContent = 'Locating…';
+    hint.className = 'hint';
+
+    navigator.geolocation.getCurrentPosition(
+      async (pos) => {
+        const {latitude, longitude} = pos.coords;
+        if (map) {
+          originLatLng = new google.maps.LatLng(latitude, longitude);
+          map.panTo(originLatLng);
+          map.setZoom(14);
+
+          // Reverse geocode to show a friendly name
+          try {
+            const name = await reverseGeocode(originLatLng);
+            document.getElementById('origin').value = name;
+            hint.textContent = `✓ Using your location · ±${Math.round(pos.coords.accuracy)}m`;
+            hint.className = 'hint success';
+          } catch {
+            document.getElementById('origin').value = `${latitude.toFixed(5)}, ${longitude.toFixed(5)}`;
+            hint.textContent = `✓ Got coordinates · ±${Math.round(pos.coords.accuracy)}m`;
+            hint.className = 'hint success';
+          }
+        }
+        btn.classList.remove('loading');
+      },
+      (err) => {
+        btn.classList.remove('loading');
+        const messages = {
+          1: 'Permission denied — allow location access in browser settings',
+          2: 'Location unavailable — try again',
+          3: 'Location request timed out'
+        };
+        hint.textContent = messages[err.code] || 'Could not get location';
+        hint.className = 'hint error';
+      },
+      {enableHighAccuracy: true, timeout: 10000, maximumAge: 60000}
+    );
+  });
+
+  function reverseGeocode(latLng) {
+    return new Promise((resolve, reject) => {
+      geocoder.geocode({location: latLng}, (results, status) => {
+        if (status === 'OK' && results[0]) {
+          // Prefer the most specific readable name (neighborhood, not plus-code)
+          const r = results.find(x => !x.formatted_address.match(/^[A-Z0-9+]{4,}/)) || results[0];
+          resolve(r.formatted_address);
+        } else reject(new Error('Reverse geocode failed'));
+      });
+    });
+  }
+
+  // Open in Google Maps — deep link with all waypoints
+  document.getElementById('navBtn').addEventListener('click', () => {
+    if (!computedVariants.length) return;
+    const variant = computedVariants[selectedVariantIdx];
+    const url = buildGoogleMapsNavUrl(variant);
+    window.open(url, '_blank');
+  });
+
+  function buildGoogleMapsNavUrl(variant) {
+    // Google Maps Directions URL scheme: https://www.google.com/maps/dir/?api=1&...
+    //
+    // CHALLENGE: The URL scheme only accepts lat/lng points, not a polyline.
+    // Google Maps will re-plan road paths between points using *live* traffic,
+    // which may differ from our predicted-traffic choice.
+    //
+    // FIX: Densify waypoints by sampling 7-8 points along the actual computed
+    // route polyline. With this many anchor points on the path we picked,
+    // Maps has almost no freedom to deviate — it's forced to follow our roads.
+    //
+    // LIMIT: Google Maps URL supports max 9 waypoints. We use 8 + origin + destination.
+    //
+    // LOOP FIX: If origin === destination, Maps shows a single pin instead of a route.
+    // We use a "nudged home" point ~80m from origin as the destination so the loop
+    // renders correctly while still ending essentially at your start.
+
+    const route = variant.result.routes[0];
+    const legs = route.legs;
+    const origin = legs[0].start_location;
+
+    // Collect every point along the route (from overview_path)
+    // This gives us the actual road-level polyline Google chose
+    const fullPath = route.overview_path;
+    if (!fullPath || fullPath.length < 4) {
+      return simpleFallbackUrl(variant);
+    }
+
+    // Sample 8 evenly-spaced points along the path (excluding first/last, which are origin)
+    const sampleCount = 8;
+    const sampledWaypoints = [];
+    for (let i = 1; i <= sampleCount; i++) {
+      const idx = Math.round((i / (sampleCount + 1)) * (fullPath.length - 1));
+      sampledWaypoints.push(fullPath[idx]);
+    }
+
+    // Destination = nudged home point (~80m north of origin) so Maps renders as a loop
+    const nudgedHome = nudgePoint(origin, 0.08);
+
+    const waypointStr = sampledWaypoints
+      .map(p => `${p.lat().toFixed(6)},${p.lng().toFixed(6)}`)
+      .join('|');
+
+    const params = new URLSearchParams({
+      api: '1',
+      origin: `${origin.lat()},${origin.lng()}`,
+      destination: `${nudgedHome.lat},${nudgedHome.lng}`,
+      waypoints: waypointStr,
+      travelmode: 'driving',
+      dir_action: 'navigate'
+    });
+
+    return `https://www.google.com/maps/dir/?${params.toString()}`;
+  }
+
+  // Fallback if we somehow don't have a polyline
+  function simpleFallbackUrl(variant) {
+    const legs = variant.result.routes[0].legs;
+    const origin = legs[0].start_location;
+    const nudged = nudgePoint(origin, 0.08);
+    const waypoints = legs.slice(0, -1).map(leg =>
+      `${leg.end_location.lat()},${leg.end_location.lng()}`
+    ).join('|');
+    return `https://www.google.com/maps/dir/?api=1&origin=${origin.lat()},${origin.lng()}&destination=${nudged.lat},${nudged.lng}&waypoints=${waypoints}&travelmode=driving&dir_action=navigate`;
+  }
+
+  // Nudge a LatLng by ~distanceKm northward. Direction doesn't matter much —
+  // we just need a point distinct from origin so Maps treats it as a real destination,
+  // but close enough that turn-by-turn essentially ends at your start.
+  function nudgePoint(latLng, distanceKm) {
+    const R = 6371;
+    const lat = latLng.lat() + (distanceKm / R) * (180 / Math.PI);
+    return {lat: lat, lng: latLng.lng()};
+  }
+
+  // Load Google Maps script
+  function loadGoogleMaps() {
+    if (!API_KEY) {
+      document.getElementById('apiBanner').classList.remove('hidden');
+      document.getElementById('loaderText').textContent = 'Enter your API key above to continue';
+      return;
+    }
+    document.getElementById('apiBanner').classList.add('hidden');
+    const script = document.createElement('script');
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}&libraries=places&callback=initMap`;
+    script.async = true;
+    script.onerror = () => {
+      document.getElementById('apiBanner').classList.remove('hidden');
+      alert('Failed to load Google Maps. Check the API key and enabled APIs.');
+    };
+    document.head.appendChild(script);
+  }
+
+  // Custom map style — subtle, low-chroma, matches aesthetic
+  const mapStyle = [
+    {elementType:"geometry",stylers:[{color:"#ebe6d8"}]},
+    {elementType:"labels.text.fill",stylers:[{color:"#6a665e"}]},
+    {elementType:"labels.text.stroke",stylers:[{color:"#f4efe6"}]},
+    {featureType:"administrative",elementType:"geometry.stroke",stylers:[{color:"#d9d2c4"}]},
+    {featureType:"poi",stylers:[{visibility:"off"}]},
+    {featureType:"road",elementType:"geometry",stylers:[{color:"#ffffff"}]},
+    {featureType:"road",elementType:"geometry.stroke",stylers:[{color:"#d9d2c4"}]},
+    {featureType:"road.highway",elementType:"geometry",stylers:[{color:"#f4efe6"}]},
+    {featureType:"road.highway",elementType:"geometry.stroke",stylers:[{color:"#c9b89a"}]},
+    {featureType:"transit",stylers:[{visibility:"off"}]},
+    {featureType:"water",elementType:"geometry",stylers:[{color:"#c5d5db"}]}
+  ];
+
+  window.initMap = function() {
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: 19.0760, lng: 72.8777}, // Mumbai
+      zoom: 11,
+      styles: mapStyle,
+      mapTypeControl: false,
+      streetViewControl: false,
+      fullscreenControl: false,
+      zoomControl: true
+    });
+
+    directionsService = new google.maps.DirectionsService();
+    directionsRenderer = new google.maps.DirectionsRenderer({
+      map: map,
+      suppressMarkers: false,
+      polylineOptions: {
+        strokeColor: '#e8471f',
+        strokeWeight: 5,
+        strokeOpacity: 0.85
+      }
+    });
+    geocoder = new google.maps.Geocoder();
+
+    // Autocomplete on origin
+    const input = document.getElementById('origin');
+    const autocomplete = new google.maps.places.Autocomplete(input, {
+      componentRestrictions: {country: 'in'},
+      fields: ['geometry', 'formatted_address']
+    });
+    autocomplete.addListener('place_changed', () => {
+      const place = autocomplete.getPlace();
+      if (place.geometry) {
+        originLatLng = place.geometry.location;
+        map.panTo(originLatLng);
+        map.setZoom(12);
+      }
+    });
+
+    document.getElementById('mapOverlay').textContent = 'Ready — enter details →';
+  };
+
+  // Plan button
+  document.getElementById('planBtn').addEventListener('click', planRoute);
+
+  async function planRoute() {
+    const errorBox = document.getElementById('errorBox');
+    errorBox.innerHTML = '';
+
+    if (!map) {
+      errorBox.innerHTML = '<div class="error-msg">Map not loaded. Check your API key.</div>';
+      return;
+    }
+
+    const originText = document.getElementById('origin').value.trim();
+    if (!originText) {
+      errorBox.innerHTML = '<div class="error-msg">Enter a start location.</div>';
+      return;
+    }
+
+    const date = document.getElementById('date').value;
+    const time = document.getElementById('time').value;
+    let departureTime = new Date(`${date}T${time}:00`);
+    // Google's traffic prediction requires future time — auto-bump if past/now
+    if (departureTime.getTime() <= Date.now()) {
+      departureTime = new Date(Date.now() + 60 * 1000);
+    }
+
+    const target = currentMode === 'distance'
+      ? parseFloat(document.getElementById('distance').value)    // km
+      : parseFloat(document.getElementById('duration').value);   // hrs
+
+    document.getElementById('loader').classList.add('show');
+    document.getElementById('loaderText').textContent = 'Finding origin…';
+
+    try {
+      // Geocode if needed
+      if (!originLatLng) {
+        originLatLng = await geocode(originText);
+      }
+
+      // Estimate target distance if user chose duration mode
+      // Assume average 30 km/h in Mumbai (conservative) → distance = hours * 30
+      const targetKm = currentMode === 'distance' ? target : target * 30;
+
+      document.getElementById('loaderText').textContent = 'Generating route options…';
+
+      // Generate candidate waypoint loops in various directions
+      const dirPref = document.getElementById('direction').value;
+      const candidates = generateCandidateLoops(originLatLng, targetKm, dirPref);
+
+      document.getElementById('loaderText').textContent = `Testing ${candidates.length} routes against traffic…`;
+
+      // Test each candidate via Directions API with traffic
+      const results = [];
+      for (let i = 0; i < candidates.length; i++) {
+        document.getElementById('loaderText').textContent = `Testing route ${i+1} of ${candidates.length}…`;
+        try {
+          const result = await getDirections(originLatLng, candidates[i].waypoints, departureTime);
+          if (result) {
+            results.push({
+              name: candidates[i].name,
+              direction: candidates[i].direction,
+              result: result,
+              stats: computeStats(result, targetKm, target, currentMode)
+            });
+          }
+        } catch (e) {
+          console.warn(`Route ${i+1} failed:`, e.message);
+        }
+      }
+
+      if (results.length === 0) {
+        throw new Error('No viable routes found. Try a different distance or location.');
+      }
+
+      // Score: prioritize low traffic delay, then distance match
+      results.forEach(r => {
+        const trafficPenalty = r.stats.trafficDelayMin * 2; // 2 points per min of delay
+        const distPenalty = Math.abs(r.stats.distanceKm - targetKm) * 1.5;
+        r.score = trafficPenalty + distPenalty;
+      });
+      results.sort((a, b) => a.score - b.score);
+
+      computedVariants = results;
+      selectedVariantIdx = 0;
+      renderResults();
+
+    } catch (err) {
+      console.error(err);
+      errorBox.innerHTML = `<div class="error-msg">${err.message || 'Something went wrong.'}</div>`;
+    } finally {
+      document.getElementById('loader').classList.remove('show');
+    }
+  }
+
+  function geocode(address) {
+    return new Promise((resolve, reject) => {
+      geocoder.geocode({address: address, componentRestrictions: {country: 'in'}}, (results, status) => {
+        if (status === 'OK' && results[0]) {
+          resolve(results[0].geometry.location);
+        } else {
+          reject(new Error('Could not find that location. Try a more specific address.'));
+        }
+      });
+    });
+  }
+
+  // Generate circular loop waypoints at various bearings
+  function generateCandidateLoops(origin, targetKm, dirPref) {
+    const directions = {
+      N: 0, NE: 45, E: 90, SE: 135, S: 180, SW: 225, W: 270, NW: 315
+    };
+
+    // If user picked a direction, bias toward it; else test several
+    let bearings;
+    if (dirPref === 'auto') {
+      bearings = [0, 45, 90, 135, 180, 225, 270, 315];
+    } else {
+      const b = directions[dirPref];
+      bearings = [b - 30, b, b + 30]; // test 3 variants around chosen direction
+    }
+
+    // Circuit radius: for a triangular-ish loop with 3 waypoints,
+    // perimeter ≈ 2 * radius * (1 + sqrt(3)) ≈ 5.46 * radius
+    // So radius ≈ targetKm / 5.46. We'll use radius = targetKm / 5
+    const radius = targetKm / 5;
+
+    return bearings.map(bearing => {
+      // Create 3 waypoints forming a loop
+      const wp1 = offsetPoint(origin, radius, bearing - 40);
+      const wp2 = offsetPoint(origin, radius * 1.1, bearing);
+      const wp3 = offsetPoint(origin, radius, bearing + 40);
+      return {
+        name: bearingName(bearing),
+        direction: bearing,
+        waypoints: [
+          {location: wp1, stopover: false},
+          {location: wp2, stopover: false},
+          {location: wp3, stopover: false}
+        ]
+      };
+    });
+  }
+
+  // Offset a lat/lng by distance (km) and bearing (degrees)
+  function offsetPoint(latLng, distanceKm, bearingDeg) {
+    const R = 6371; // Earth radius km
+    const lat1 = toRad(latLng.lat());
+    const lng1 = toRad(latLng.lng());
+    const bearing = toRad(bearingDeg);
+    const d = distanceKm / R;
+
+    const lat2 = Math.asin(
+      Math.sin(lat1) * Math.cos(d) +
+      Math.cos(lat1) * Math.sin(d) * Math.cos(bearing)
+    );
+    const lng2 = lng1 + Math.atan2(
+      Math.sin(bearing) * Math.sin(d) * Math.cos(lat1),
+      Math.cos(d) - Math.sin(lat1) * Math.sin(lat2)
+    );
+    return new google.maps.LatLng(toDeg(lat2), toDeg(lng2));
+  }
+
+  const toRad = d => d * Math.PI / 180;
+  const toDeg = r => r * 180 / Math.PI;
+
+  function bearingName(deg) {
+    deg = ((deg % 360) + 360) % 360;
+    const names = ['North','Northeast','East','Southeast','South','Southwest','West','Northwest'];
+    return names[Math.round(deg / 45) % 8] + ' loop';
+  }
+
+  function getDirections(origin, waypoints, departureTime) {
+    return new Promise((resolve, reject) => {
+      directionsService.route({
+        origin: origin,
+        destination: origin, // loop back
+        waypoints: waypoints,
+        travelMode: google.maps.TravelMode.DRIVING,
+        drivingOptions: {
+          departureTime: departureTime,
+          trafficModel: google.maps.TrafficModel.BEST_GUESS
+        },
+        optimizeWaypoints: false,
+        avoidTolls: false
+      }, (result, status) => {
+        if (status === 'OK') resolve(result);
+        else reject(new Error(`Directions failed: ${status}`));
+      });
+    });
+  }
+
+  function computeStats(result, targetKm, target, mode) {
+    let distMeters = 0, durSec = 0, durTrafficSec = 0;
+    result.routes[0].legs.forEach(leg => {
+      distMeters += leg.distance.value;
+      durSec += leg.duration.value;
+      durTrafficSec += (leg.duration_in_traffic?.value || leg.duration.value);
+    });
+    return {
+      distanceKm: distMeters / 1000,
+      durationMin: durSec / 60,
+      durationTrafficMin: durTrafficSec / 60,
+      trafficDelayMin: (durTrafficSec - durSec) / 60
+    };
+  }
+
+  function renderResults() {
+    const results = document.getElementById('results');
+    results.classList.add('show');
+
+    const variant = computedVariants[selectedVariantIdx];
+    const s = variant.stats;
+
+    // Update map
+    directionsRenderer.setDirections(variant.result);
+
+    // Stats
+    document.getElementById('statDist').innerHTML = `${s.distanceKm.toFixed(1)}<small>km</small>`;
+    document.getElementById('statTime').innerHTML = `${Math.round(s.durationTrafficMin)}<small>min</small>`;
+
+    // Traffic score
+    const delay = s.trafficDelayMin;
+    const scoreEl = document.getElementById('trafficScore');
+    scoreEl.className = 'traffic-score ' + (delay < 5 ? 'good' : delay < 15 ? 'warn' : 'bad');
+    const label = delay < 5 ? 'Clear run ✓' : delay < 15 ? 'Mild slowdowns' : 'Heavy traffic';
+    document.getElementById('trafficDelayText').textContent = `+${Math.round(delay)} min • ${label}`;
+
+    // Variant list
+    const list = document.getElementById('variantList');
+    list.innerHTML = '';
+    computedVariants.slice(0, 6).forEach((v, idx) => {
+      const el = document.createElement('div');
+      el.className = 'variant' + (idx === selectedVariantIdx ? ' selected' : '');
+      el.innerHTML = `
+        <div class="variant-name">${v.name}</div>
+        <div class="variant-stats">${v.stats.distanceKm.toFixed(0)}km · ${Math.round(v.stats.durationTrafficMin)}min · +${Math.round(v.stats.trafficDelayMin)}min</div>
+      `;
+      el.addEventListener('click', () => {
+        selectedVariantIdx = idx;
+        renderResults();
+      });
+      list.appendChild(el);
+    });
+
+    document.getElementById('mapOverlay').textContent =
+      `${variant.name} · ${s.distanceKm.toFixed(1)}km · ${Math.round(s.durationTrafficMin)}min`;
+  }
+
+  // Boot
+  loadGoogleMaps();
+</script>
+</body>
+</html>
