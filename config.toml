@@ -1,21 +1,18 @@
 baseURL = "https://surajtripathi.info/"
 title = "Suraj Tripathi"
 theme = "hugo-coder"
-languagecode = "en"
+locale = "en"
 defaultcontentlanguage = "en"
 enableEmoji=true
-disqusShortname = "surajtripathi-info"
-
-paginate = 20
 
 [markup.highlight]
 style = "github-dark"
 
 [params]
   author = "Suraj Tripathi"
-  info = "I solve problems using code"
-  description = "Suraj's personal website"
-  keywords = "blog,developer,personal,backend"
+  info = "I ship real products fast by directing AI agents."
+  description = "Suraj Tripathi — AI-native builder and generalist engineer. I ship real products fast by directing AI agents, with 10 years of scars from BrowserStack and GitLab scale."
+  keywords = "software engineer,ai-native builder,agentic engineering,staff engineer,technical co-founder,distributed systems,generalist"
   avatarurl = "images/avatar.png"
 
   since = 2014
@@ -25,7 +22,7 @@ style = "github-dark"
   colorScheme = "auto"
   hidecolorschemetoggle = false
 
-  # customCSS = ["css/custom.css"]
+  customCSS = ["css/custom.css"]
   # customSCSS = ["scss/custom.scss"]
   # customJS = ["js/custom.js"]
 
@@ -63,9 +60,19 @@ style = "github-dark"
   weight = 1
   url  = "posts/"
 [[menu.main]]
-  name = "About"
+  name = "Projects"
   weight = 2
+  url = "projects/"
+[[menu.main]]
+  name = "About"
+  weight = 3
   url = "about/"
+
+[pagination]
+  pagerSize = 20
+
+[services.disqus]
+  shortname = "surajtripathi-info"
 
 [module]
 [module.hugoVersion]

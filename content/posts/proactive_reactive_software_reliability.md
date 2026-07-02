@@ -1,6 +1,6 @@
 ---
- title: Proactive vs. Reactive Software Reliability
- date: "2023-08-17"
+title: Proactive vs. Reactive Software Reliability
+date: "2023-08-17"
 ---
 
 In the dynamic landscape of software engineering, reliability is the cornerstone of user satisfaction. To achieve this, two distinct strategies come into play: proactive and reactive measures. However, a crucial ingredient often overlooked in the reliability recipe is the role of metrics and monitoring. Let's delve into how the right metrics, coupled with proactive and reactive strategies, can amplify the reliability of your software systems.
@@ -19,7 +19,7 @@ The true power of proactive reliability emerges when the right metrics are emplo
 
 ### Choosing the Right Metrics
 
-The choice of metrics depends on the nature of the software, the goals of reliability assessment, and the specific industry or domain in which the software operates. We can broadly clasiffy them as Technical and Domain specific
+The choice of metrics depends on the nature of the software, the goals of reliability assessment, and the specific industry or domain in which the software operates. We can broadly classify them as technical and domain-specific.
 
 #### Technical Metrics
 

@@ -1,7 +1,8 @@
---- 
+---
 title: Evolution of HTTP
-date: "2023-06-06" 
---- 
+date: "2023-06-06"
+draft: true
+---
 
 The Hypertext Transfer Protocol (HTTP) is the foundation of the World Wide Web. It is the language that web browsers and web servers use to communicate with each other. HTTP has come a long way since its humble beginnings in 1989. In this article, we will take a look at the evolution of HTTP and how it has shaped the way we use the internet.
 
@@ -28,14 +29,14 @@ In 1999, HTTP/1.1 was released. HTTP/1.1 added support for a variety of new feat
 Only in 2015, HTTP/2 was released. HTTP/2 is a major revision of the HTTP protocol that introduces a number of new features and improvements. Some of the key features of HTTP/2 include:
 
 1. Header compression: HTTP/2 compresses headers, which reduces the amount of data that needs to be transmitted.
-1. Prioritization: HTTP/2 allows web browsers to prioritize requests, which can improve performance for important requests.
-1. Server push: HTTP/2 allows servers to proactively send resources to web browsers before the web browser requests them. This can improve performance by reducing the number of requests that need to be made by the web browser.
+2. Prioritization: HTTP/2 allows web browsers to prioritize requests, which can improve performance for important requests.
+3. Server push: HTTP/2 allows servers to proactively send resources to web browsers before the web browser requests them. This can improve performance by reducing the number of requests that need to be made by the web browser.
 
 ### The Future of HTTP
 
 The future of HTTP is bright. The protocol is constantly evolving to meet the needs of the ever-changing web. HTTP/3 is just around the corner, some expected changes include:
 
-- [QUIC](https://en.wikipedia.org/wiki/QUIC): HTTP/3 will use QUIC (Quick UDP Internet Connection), a new transport protocol that is designed to be more efficient but equally reliable to TCP. QUIC is based on UDP, which is a connectionless protocol that is better suited for the internet of today.QUIC is designed for mobile-heavy Internet usage in which people carry smartphones that constantly switch from one network to another as they move about their day.
+- [QUIC](https://en.wikipedia.org/wiki/QUIC): HTTP/3 will use QUIC (Quick UDP Internet Connections), a new transport protocol designed to be more efficient while remaining as reliable as TCP. QUIC is based on UDP, a connectionless protocol better suited to today's internet. QUIC is designed for mobile-heavy internet usage, in which people carry smartphones that constantly switch from one network to another as they move about their day.
 
 The improvements should result in:
 

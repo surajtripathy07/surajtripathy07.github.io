@@ -1,0 +1,147 @@
+/* ============================================================
+   Custom layer on top of hugo-coder.
+   Root font-size is 62.5% (1rem = 10px). Dark mode follows the
+   theme: body.colorscheme-dark, plus a prefers-color-scheme
+   fallback for body.colorscheme-auto.
+   ============================================================ */
+
+:root {
+  --accent: #1565c0;
+  --card-bg: #ffffff;
+  --card-border: #e7e7e9;
+  --card-shadow: rgba(20, 30, 50, 0.08);
+  --muted: #55606b;
+  --kicker: #1565c0;
+}
+
+body.colorscheme-dark {
+  --accent: #58a6ff;
+  --card-bg: #2a2a2a;
+  --card-border: #3d3d3d;
+  --card-shadow: rgba(0, 0, 0, 0.45);
+  --muted: #a7a7a7;
+  --kicker: #58a6ff;
+}
+@media (prefers-color-scheme: dark) {
+  body.colorscheme-auto {
+    --accent: #58a6ff;
+    --card-bg: #2a2a2a;
+    --card-border: #3d3d3d;
+    --card-shadow: rgba(0, 0, 0, 0.45);
+    --muted: #a7a7a7;
+    --kicker: #58a6ff;
+  }
+}
+
+/* ---- Homepage landing hub ------------------------------------ */
+
+/* The theme centers the homepage with a flex ROW meant for a single
+   .about block. Stack our landing-hub content BELOW the avatar/name
+   block instead of letting it become a second column beside it. */
+.centered {
+  flex-direction: column;
+}
+
+.home-extra {
+  width: 100%;
+  max-width: 62rem;
+  margin: 2.5rem auto 0;
+  text-align: center;
+}
+
+.home-extra .tagline-sub {
+  font-size: 1.9rem;
+  line-height: 1.6;
+  color: var(--muted);
+  margin: 0 auto 3.5rem;
+  max-width: 54rem;
+}
+
+.featured {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.6rem;
+  margin: 0 0 3.5rem 0;
+}
+@media only screen and (max-width: 768px) {
+  .featured {
+    grid-template-columns: 1fr;
+  }
+}
+
+.feature-card {
+  display: block;
+  padding: 2.2rem 2rem;
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  background: var(--card-bg);
+  color: inherit;
+  font-weight: 400;
+  text-align: left;
+  transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+}
+.feature-card:hover {
+  text-decoration: none;
+  transform: translateY(-3px);
+  border-color: var(--accent);
+  box-shadow: 0 10px 30px -12px var(--card-shadow);
+}
+.feature-card h3 {
+  margin: 0.8rem 0 1rem 0;
+  font-size: 2.1rem;
+  line-height: 1.2;
+}
+.feature-card p {
+  margin: 0;
+  font-size: 1.5rem;
+  line-height: 1.55;
+  color: var(--muted);
+}
+.feature-kicker {
+  font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: var(--kicker);
+}
+
+.home-cta {
+  margin: 0;
+}
+.home-cta .cta-strong {
+  display: inline-block;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--accent);
+  border: 1.5px solid var(--accent);
+  border-radius: 8px;
+  padding: 1rem 2rem;
+}
+.home-cta .cta-strong:hover {
+  text-decoration: none;
+  background: var(--accent);
+  color: #fff;
+}
+body.colorscheme-dark .home-cta .cta-strong:hover {
+  color: #17181c;
+}
+
+/* ---- Reading measure for post bodies ------------------------- */
+/* Keep long-form prose to a comfortable line length without
+   touching the theme's global container width. */
+.post .content,
+article .content {
+  max-width: 72rem;
+}
+
+/* ---- Respect reduced-motion --------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .feature-card,
+  a {
+    transition: none;
+  }
+  .feature-card:hover {
+    transform: none;
+  }
+}

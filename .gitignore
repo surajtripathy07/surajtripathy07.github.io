@@ -1,0 +1,13 @@
+/.handoff/
+
+# Hugo build artifacts
+/public/
+/resources/_gen/
+.hugo_build.lock
+
+# Local Claude Code settings (personal, not shared)
+.claude/settings.local.json
+
+# LinkedIn drafts are unpublished copy — keep the README, ignore the drafts
+/linkedin-drafts/*
+!/linkedin-drafts/README.md
