@@ -27,7 +27,7 @@ The friction it removes is the point. A rent reminder surfaces in the app; one t
 
 A separate automated flow generates each tenant's rent agreement and police-verification (PV) documents from a Google Form via a Telegram bot.
 
-Started as a web app (Next.js/Prisma). Rewrote it native after the web version didn't survive contact with how the business actually runs day to day.
+The app itself started as just a call log, so I could jump from an incoming call straight to the right WhatsApp thread instead of copy-pasting a number between apps, then grew into lead tracking, flats, and everything else as each new manual annoyance became the next feature. A separate early attempt at a Next.js/Prisma site for direct-inbound leads got dropped partway through — it needed flat/bed data that didn't exist yet outside my own head.
 
 **Stack:** Kotlin, Jetpack Compose (Material 3), Supabase (Postgres + Auth + RLS), Google Sign-In.
 

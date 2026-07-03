@@ -135,6 +135,91 @@ article .content {
   max-width: 72rem;
 }
 
+/* ---- Tighten global typography ------------------------------- */
+/* The theme runs very airy: body line-height 1.8, 2rem paragraph
+   gaps, 4rem above every heading. Pull the leading and vertical
+   rhythm in so text reads denser and more deliberate. Reversible —
+   delete this block to restore the theme defaults. */
+body {
+  line-height: 1.6;
+}
+p {
+  margin: 1.5rem 0;
+}
+.content h1,
+.content h2,
+.content h3,
+.content h4,
+.content h5,
+.content h6 {
+  margin: 3rem 0 1.4rem 0;
+}
+.content li {
+  margin: 0.5rem 0;
+}
+
+/* ---- Post-body images ----------------------------------------- */
+/* img is inline by default, so a caption paragraph right after an
+   image (or a malformed single-paragraph image+caption) wraps text
+   up against it instead of flowing cleanly below. Force block. */
+.content img {
+  display: block;
+  margin: 1.5rem auto;
+}
+.content p:has(> img:only-child) + p {
+  margin-top: -0.75rem;
+  text-align: center;
+  font-size: 0.9em;
+  opacity: 0.75;
+}
+
+/* Side-by-side screenshots via {{% gallery %}}, capped so no single
+   image dominates the page — each stays at roughly a third width. */
+.content .img-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1.2rem;
+  margin: 1.5rem 0;
+}
+.content .img-gallery p {
+  margin: 0;
+}
+.content .img-gallery img {
+  margin: 0;
+  max-width: 32%;
+  border-radius: 8px;
+  border: 1px solid var(--card-border);
+}
+@media only screen and (max-width: 768px) {
+  .content .img-gallery img {
+    max-width: 45%;
+  }
+}
+.content .img-gallery + p em {
+  display: block;
+  text-align: center;
+  font-size: 0.9em;
+  opacity: 0.75;
+  margin-top: -0.75rem;
+}
+
+/* ---- Projects page: clear demarcation between entries -------- */
+/* Plain h2-per-project read as one wall of text. A rule above each
+   project title (skip the first) separates them like distinct cards
+   without needing per-project markup. */
+.page-projects .content h2 {
+  margin-top: 4.5rem;
+  padding-top: 3rem;
+  border-top: 1px solid var(--card-border);
+}
+.page-projects .content h2:first-of-type {
+  margin-top: 3rem;
+  padding-top: 0;
+  border-top: none;
+}
+
 /* ---- Respect reduced-motion --------------------------------- */
 @media (prefers-reduced-motion: reduce) {
   .feature-card,
