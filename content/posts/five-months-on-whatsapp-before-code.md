@@ -26,6 +26,7 @@ In parallel, I was tracking income per bed, chasing pending deposits, and remind
 {{< gallery >}}
 <img src="/images/staytion/dashboard.png" alt="Staytion dashboard — per-flat occupancy, revenue, and margin">
 <img src="/images/staytion/manage-1.png" alt="Staytion rent collection view">
+<img src="/images/staytion/manage-2.png" alt="Staytion rent collection view, another flat">
 {{< /gallery >}}
 
 *The dashboard (per-flat occupancy, revenue, margin) and rent collection (per-tenant, with overdue flags and one-tap reminders) — real flats, real tenants, real numbers.*
