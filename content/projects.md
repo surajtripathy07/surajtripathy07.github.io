@@ -7,27 +7,37 @@ Things I've built end to end, mostly by directing AI coding agents rather than t
 
 ## Membral
 
-*Own your AI conversations.*
+*Your coding agent answers from what past sessions found.*
 
-A self-hosted knowledge graph over my ChatGPT/Claude/Grok conversation history. A Chrome extension syncs chats into a Next.js/Supabase backend, where a multi-pass LLM extraction pipeline turns raw conversations into a bi-temporal knowledge graph: nodes for people, tools, organizations, and life areas, edges with confidence scores and full audit provenance, all embedded with pgvector and clustered into a navigable tree. Exposed to any AI tool through a self-hosted MCP server, so the graph becomes queryable context for other agents.
+Every coding harness keeps its own transcripts in its own format, on one machine, until it prunes them. Membral sits underneath all of them. One command per harness, then every session from Claude Code, opencode, GitHub Copilot and Codex CLI lands in one Postgres store, normalised into one shape: turns in order, models, token usage, tools called, files touched, the sub-agent tree and a server-side cost figure. A session that needs the past pulls it back over MCP: decisions and settled designs, issues and PRs worked on, outcomes, dead ends, what a parallel session did today. It hands the agent the link; the agent checks live state itself.
 
-Currently running on 976 real conversations → 2,082 nodes / 2,107 edges.
+Measured on five frozen tasks, five runs each with and without Membral: the median answer got at least one more fact right on four of five, with no harmful answer in 25 runs. For an Opus session that delegates to sub-agents, Membral answered from recorded sessions in 0.30 to 0.37x the wall time. Cost comes out about even, and it does not help a session resume after a context compaction; the eval write-ups in the repo say where it falls short.
 
-[Source on GitHub →](https://github.com/surajtripathy07/membral)
+In use on every session I run since August 2026. Built solo by directing agents, with the data model and the judgment calls mine. MIT.
 
-**Stack:** Next.js 15, React 19, Supabase (Postgres + pgvector), OpenAI embeddings, MCP.
+[Source on GitHub →](https://github.com/surajtripathy07/membral) &middot; [membral.me →](https://membral.me)
+
+**Stack:** TypeScript, Postgres (Supabase), MCP server, Claude Code plugin, CLI.
 
 ## Staytion
 
-*The app I run my rental business on.*
+*A coliving business that runs on an agent.*
 
-A native Android app that runs a real PG (paying-guest) rental side business end to end — ~6 flats, ~42 tenants, semi-passive cash flow. It sits on top of how the business already works and takes the daily operations off my plate: onboarding, rent, electricity, deposits, caretakers, and offboarding, all in one place with visibility over every flat.
+[Staytion](https://staytioncoliving.com) is a paying-guest coliving business in Mumbai: 33 flats and 318 beds that my family and I sell through one pipeline, five of the flats mine. An agent on a dedicated WhatsApp number answers every inquiry, qualifies the lead, books the visit, follows up, chases rent, reads Aadhaar cards for onboarding, drives agreement signing and sends the owners a daily digest. It handled 941 inquiries in the last 90 days. The business takes about an hour of my day.
 
-The friction it removes is the point. A rent reminder surfaces in the app; one tap opens WhatsApp with the right message already written for the right tenant (it auto-detects Personal vs Business). Electricity is calculated from AC meter readings I punch in, split per tenant, and turned into an individual PDF I can share. It tracks the full tenant lifecycle — inquiry → reserved → active → notice → moved out — plus deposit slips and settlements, caretaker-salary reminders, and a call log that matches incoming call recordings to leads so I know who's calling before I answer.
+It went live in shadow mode first, drafting replies a human approved, with a kill switch that pauses all outbound messages and a hard rule that anything touching money waits for a person. Private repo.
+
+**Stack:** Node, an agent runtime on WhatsApp, Supabase (Postgres).
+
+### How it started
+
+A native Android app that runs a real PG (paying-guest) rental side business end to end, with six flats and forty-two tenants at the time, semi-passive cash flow. It sits on top of how the business already works and takes the daily operations off my plate: onboarding, rent, electricity, deposits, caretakers, and offboarding, all in one place with visibility over every flat.
+
+The friction it removes is the point. A rent reminder surfaces in the app; one tap opens WhatsApp with the right message already written for the right tenant (it auto-detects Personal vs Business). Electricity is calculated from AC meter readings I punch in, split per tenant, and turned into an individual PDF I can share. It tracks the full tenant lifecycle (inquiry → reserved → active → notice → moved out), plus deposit slips and settlements, caretaker-salary reminders, and a call log that matches incoming call recordings to leads so I know who's calling before I answer.
 
 A separate automated flow generates each tenant's rent agreement and police-verification (PV) documents from a Google Form via a Telegram bot.
 
-The app itself started as just a call log, so I could jump from an incoming call straight to the right WhatsApp thread instead of copy-pasting a number between apps, then grew into lead tracking, flats, and everything else as each new manual annoyance became the next feature. A separate early attempt at a Next.js/Prisma site for direct-inbound leads got dropped partway through — it needed flat/bed data that didn't exist yet outside my own head.
+The app itself started as just a call log, so I could jump from an incoming call straight to the right WhatsApp thread instead of copy-pasting a number between apps, then grew into lead tracking, flats, and everything else as each new manual annoyance became the next feature. A separate early attempt at a Next.js/Prisma site for direct-inbound leads got dropped partway through: it needed flat/bed data that didn't exist yet outside my own head.
 
 **Stack:** Kotlin, Jetpack Compose (Material 3), Supabase (Postgres + Auth + RLS), Google Sign-In.
 
@@ -35,9 +45,9 @@ The app itself started as just a call log, so I could jump from an incoming call
 
 *Summarize any YouTube video and ask it questions.*
 
-An AI learning layer for YouTube: toggle it on any captioned video and it turns the transcript into AI summaries, "ask anything" Q&A, smart highlights that jump you straight to the key moments, and auto-generated quizzes to test what actually stuck — all from a clean, collapsible sidebar. I shipped this before YouTube had its own in-video AI Q&A; they added something similar a few months after it went live. I've since sunsetted it.
+An AI learning layer for YouTube: toggle it on any captioned video and it turns the transcript into AI summaries, "ask anything" Q&A, smart highlights that jump you straight to the key moments, and auto-generated quizzes to test what actually stuck, all from a clean, collapsible sidebar. I shipped this before YouTube had its own in-video AI Q&A; they added something similar a few months after it went live. I've since sunsetted it.
 
-[geniusaix.com →](https://geniusaix.com/) &middot; [Chrome Web Store listing →](https://chromewebstore.google.com/detail/genius-aix-for-youtube-su/ddmilgmdhnppllhepeobhgjkfgkgnkeb) *(sunsetted — no longer maintained)*
+[geniusaix.com →](https://geniusaix.com/) &middot; [Chrome Web Store listing →](https://chromewebstore.google.com/detail/genius-aix-for-youtube-su/ddmilgmdhnppllhepeobhgjkfgkgnkeb) *(sunsetted, no longer maintained)*
 
 **Stack:** Chrome Extension (MV3), Firebase.
 
@@ -51,7 +61,7 @@ Google Maps optimizes for speed: the fastest way from A to B. What I wanted was 
 
 *Upgrade everyday prompts into expert-level instructions.*
 
-A Chrome extension that sharpens a rough prompt right where you're typing it. Select your text in ChatGPT, Claude, Gemini, Grok, or Copilot, hit Cmd/Ctrl+E, and it rewrites the prompt into a more precise instruction — with optional controls for intent, role, format, tone, and constraints when you want to steer the rewrite. Your API key is stored locally, and only ever goes to the model you're talking to.
+A Chrome extension that sharpens a rough prompt right where you're typing it. Select your text in ChatGPT, Claude, Gemini, Grok, or Copilot, hit Cmd/Ctrl+E, and it rewrites the prompt into a more precise instruction, with optional controls for intent, role, format, tone, and constraints when you want to steer the rewrite. Your API key is stored locally, and only ever goes to the model you're talking to.
 
 [Get the extension →](https://chromewebstore.google.com/detail/promptly-enhance-your-pro/jepfpialangjoaddkjjiahijbelpggpo)
 
