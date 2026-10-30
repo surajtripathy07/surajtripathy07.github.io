@@ -67,6 +67,10 @@ style = "github-dark"
   name = "About"
   weight = 3
   url = "about/"
+[[menu.main]]
+  name = "Drops"
+  weight = 4
+  url = "drops/"
 
 [pagination]
   pagerSize = 20
