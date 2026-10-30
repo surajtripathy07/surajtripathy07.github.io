@@ -230,3 +230,11 @@ p {
     transform: none;
   }
 }
+
+/* Drops and posts read on phones: no justified text, no hyphenation. */
+.content p,
+.content li {
+  text-align: left;
+  text-justify: none;
+  hyphens: manual;
+}
