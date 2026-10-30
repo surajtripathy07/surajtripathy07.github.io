@@ -39,6 +39,7 @@ jobs:
           && sudo dpkg -i ${{ runner.temp }}/hugo.deb
       - name: Install Dart Sass Embedded
         run: sudo snap install dart-sass-embedded
+        continue-on-error: true
       - name: Checkout
         uses: actions/checkout@v4
         with:
