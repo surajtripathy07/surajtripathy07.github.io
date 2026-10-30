@@ -166,7 +166,8 @@ p {
   display: block;
   margin: 1.5rem auto;
 }
-.content p:has(> img:only-child) + p {
+/* Caption only when the paragraph after a lone image is written in italics (*caption*). Drops put body text after the cover and must not be captioned. */
+.content p:has(> img:only-child) + p:has(> em:only-child) {
   margin-top: -0.75rem;
   text-align: center;
   font-size: 0.9em;
@@ -232,6 +233,7 @@ p {
 }
 
 /* Drops and posts read on phones: no justified text, no hyphenation. */
+.content article p,
 .content p,
 .content li {
   text-align: left;
