@@ -16,4 +16,4 @@ Fix: give up on a chunk only when the chunk itself is the problem, such as input
 
 A retry job should forgive a bad minute, not the chunk.
 
-[Names in this post, explained](https://surajtripathi.info/drops/)
+[What drops are, and the names in them](https://surajtripathi.info/drops/)

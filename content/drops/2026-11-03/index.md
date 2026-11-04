@@ -16,4 +16,4 @@ Lower cut-offs still let a wrong match through on at least one of the 6. For raw
 
 Raw chat is noisier than notes, so it has to clear a higher bar before it counts as an answer.
 
-[Names in this post, explained](https://surajtripathi.info/drops/)
+[What drops are, and the names in them](https://surajtripathi.info/drops/)

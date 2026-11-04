@@ -14,4 +14,4 @@ That came to 697 KB in a single message between two processes, which is over And
 
 A spinner with no timeout is a bug report nobody can file.
 
-[Names in this post, explained](https://surajtripathi.info/drops/)
+[What drops are, and the names in them](https://surajtripathi.info/drops/)
