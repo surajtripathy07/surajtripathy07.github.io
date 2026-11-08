@@ -1,4 +1,5 @@
 /.handoff/
+/research_notes/
 
 # Hugo build artifacts
 /public/

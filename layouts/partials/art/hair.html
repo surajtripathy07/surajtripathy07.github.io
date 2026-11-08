@@ -1,0 +1,2 @@
+{{- /* A hand-drawn hairline from the generated pool (tools/art/sheet.mjs). Pass an integer. */ -}}
+{{- index hugo.Data.art.hair (mod . (len hugo.Data.art.hair)) | safeHTML -}}

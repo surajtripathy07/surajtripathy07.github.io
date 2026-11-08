@@ -1,0 +1,8 @@
+{{ define "main" }}
+<h1>{{ .Title }}</h1>
+{{ with .Params.lead }}<p class="lead">{{ . | markdownify }}</p>{{ end }}
+{{ if not .Date.IsZero }}<p class="byline"><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 January 2006" }}</time></p>{{ end }}
+<div class="prose">
+{{ .Content }}
+</div>
+{{ end }}

@@ -1,0 +1,236 @@
+/* Home page: the painted studio and the sheet pulled off the easel. Tokens come from tokens.css. */
+:root{--sw:min(100vw,520px)}
+body{margin:0;background:var(--deep);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.5}
+a{color:inherit}
+a:focus-visible,button:focus-visible,.sheet:focus-visible{outline:3px solid var(--ink);outline-offset:3px;border-radius:2px}
+svg text{font-family:var(--serif)}
+
+/* ---------- the painting: fixed behind everything ---------- */
+.stage{position:fixed;top:0;height:min(100svh,calc(var(--sw) * 2.1641));left:50%;width:var(--sw);transform:translateX(-50%);z-index:0;overflow:hidden;background:var(--green)}
+.room{position:absolute;inset:0;width:100%;height:100%;display:block;animation:enter .6s ease both}
+.room.sw{display:none}
+@keyframes enter{from{opacity:0}to{opacity:1}}
+.grain{position:absolute;inset:0;pointer-events:none;z-index:2;opacity:.8;background:url(../img/grain.png) 0 0/192px 192px;animation:enter .6s ease both}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.peekbtn{position:absolute;z-index:6;left:12px;top:12px;padding:10px 14px;min-height:44px;background:var(--chalk);color:var(--ink);border:2px solid var(--ink);font:500 16px var(--sans)}
+.peekbtn:not(:focus):not(:focus-visible){position:absolute;width:1px;height:1px;min-height:0;padding:0;border:0;overflow:hidden;clip:rect(0 0 0 0)}
+
+.hot{cursor:pointer;outline:none;-webkit-tap-highlight-color:transparent}
+.hit{fill:transparent;pointer-events:all}
+.ring{fill:none;stroke:var(--chalk);stroke-width:2.5;stroke-dasharray:7 5;opacity:0;pointer-events:none}
+.hot:focus-visible .ring,.wallart.lift .ring{opacity:1}
+.wallart{transition:transform .25s ease}
+.wallart.lift{transform:translateY(-6px)}
+.p-body{transform-origin:0 0}
+.p-turn{transform:scaleX(.82)}
+.pupil{transform-box:fill-box;transform-origin:50% 50%;transform:translate(calc(-1.3px + var(--gx,0) * 1px),calc(var(--gy,0) * 1px));transition:transform .45s ease}
+.fh{transform-box:fill-box;transform-origin:50% 92%;transition:transform .5s ease}
+.fig .fh{animation:tilt 14s ease-in-out infinite}
+.c1 .fh{animation-duration:11s;animation-delay:-3s}
+.c2 .fh{animation-duration:13s;animation-delay:-6s}
+.wife .fh{animation-duration:19s}
+@keyframes tilt{0%,50%{transform:rotate(0)}60%,74%{transform:rotate(3.5deg)}86%,100%{transform:rotate(0)}}
+.flip{transform:scaleX(-.86);transition:transform .5s ease}
+.fig.lookat .flip{transform:scaleX(.84)}
+.fig.lookat .pupil{transform:translate(0,1.2px) scale(1.35)}
+.fig.lookat .fh{animation:none}
+.fig,.c1,.c2,.wife{transform-box:fill-box}
+.c1{transform-origin:50% 100%;animation:shift 13s ease-in-out infinite}
+.c2{transform-origin:50% 100%;animation:turn 17s ease-in-out infinite}
+@keyframes shift{0%,38%{transform:rotate(0)}46%,70%{transform:rotate(1.4deg)}80%,100%{transform:rotate(0)}}
+@keyframes turn{0%,45%{transform:scaleX(1)}55%,80%{transform:scaleX(.92)}90%,100%{transform:scaleX(1)}}
+.wallart .mv{transition:transform .45s ease}.wallart.on .mv{transform:translateY(var(--mv))}
+.wallart .sl{transition:transform .5s ease}.wallart.on .sl{transform:translateX(var(--sl))}
+.plq{font-family:var(--serif);font-size:calc(14.5px / var(--s,1));fill:var(--chalk);letter-spacing:.01em;paint-order:stroke;stroke:var(--ink);stroke-width:2.8px;stroke-linejoin:round}
+
+
+/* the face follows the pointer a little (set from script) */
+.face{transition:transform .5s ease;transform:translate(calc(var(--fx,0) * 1px),calc(var(--fy,0) * 1px))}
+.chk{opacity:var(--co,0);transition:opacity .3s ease}
+.mouth,.eye{transform-box:fill-box;transform-origin:50% 50%;transition:transform .25s ease}
+
+/* each of the three reacts differently when tapped, for about a second and a half (JS adds .react, then removes it) */
+.baby.react .mouth{transform:scale(1.45,1.9)}
+.baby.react .eye{transform:scaleY(.28)}
+.baby.react .fh{animation:none;transform:rotate(-9deg)}
+.baby.react .chk{opacity:.95}
+.baby.react .bz{animation:bounce .5s ease-in-out 3}
+.kid.react .mouth{transform:scale(1.3,1.12)}
+.kid.react .eye{transform:scale(1.12)}
+.kid.react .fh{animation:none;transform:rotate(5deg)}
+.kid.react .karm{animation:wave .38s ease-in-out 4;transform:rotate(-150deg)}
+.wife.react .mouth{transform:scale(1.22,1.1)}
+.wife.react .eye{transform:scaleY(.62)}
+.wife.react .fh{animation:none;transform:rotate(-8deg) translateY(-1px)}
+.wife.react .chk{opacity:.9}
+.wife.react .pupil{transform:translate(-2.4px,.3px)}
+.wife.react .bz{animation:sway2 1.5s ease-in-out 1}
+.bz{transform-box:fill-box;transform-origin:50% 100%}
+.karm{transform-box:view-box;transition:transform .3s ease}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px) rotate(-2deg)}}
+@keyframes wave{0%,100%{transform:rotate(-150deg)}50%{transform:rotate(-178deg)}}
+@keyframes sway2{0%,100%{transform:rotate(0)}30%{transform:rotate(-2.2deg)}65%{transform:rotate(1.2deg)}}
+
+/* the painter looks at the canvas */
+.p-turn{transform:scaleX(-.82)}
+/* the turn flips scaleX from -.82 to .82. An even tween passes through 0 and the head is a thin vertical sliver for as long as a slow
+   phone holds the frame. This timing curve jumps across the narrow middle so the head never drops below about a third of its width.
+   Engines without linear() get a plain snap instead of the collapse. */
+@supports (transition-timing-function:linear(0,1)){.p-turn{transition:transform 1.1s linear(0,.12 15%,.26 30%,.34 42%,.66 58%,.74 70%,.88 85%,1)}}
+.p-body{transition:transform 1.2s ease;transform:rotate(-1.4deg)}
+
+/* the canvas: seen from behind; tap turns it */
+.cvs .cvb,.cvs .cvf{transition:transform .38s ease-out}
+.cvf{transform:scaleX(0)}
+.cvb{transition-delay:.38s}
+.turned .cvb{transform:scaleX(0);transition-delay:0s}
+.turned .cvf{transform:scaleX(1);transition-delay:.38s}
+.nf{font-size:17px;fill:var(--ink)}
+.cl{fill:none;stroke:var(--ink);stroke-width:.9;stroke-dasharray:3 2.5;opacity:.5}
+.cl2{fill:none;stroke:var(--ink);stroke-width:1.1;opacity:.8}
+.co{font-family:var(--sans);font-size:9.4px;fill:var(--ink);opacity:.85;font-variant-numeric:tabular-nums}
+.wob{transform-box:view-box}
+.cue .star{transform-box:fill-box;transform-origin:50% 50%}
+.cue .sheen{transform:translateX(-60px)}
+.room:not(.tapped) .cue .star{animation:pulse 3s ease-in-out 1.5s 3}
+.tapped .cue,.turned .cue{display:none}
+@keyframes pulse{0%,60%,100%{transform:scale(1)}20%{transform:scale(1.35) rotate(12deg)}}
+.turned .cl,.turned .cl2{animation:fin .4s ease-out .76s both}
+.turned .wipe{animation:wipe .8s ease-in-out 1s both}
+.turned .co{animation:fin .35s ease-out 1.75s both}
+.turned .nf{animation:fin .35s ease-out 2.1s both}
+.wipe{transform-box:fill-box;transform-origin:50% 0}
+@keyframes fin{from{opacity:0}}
+@keyframes wipe{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+.key .kc{transition:transform .12s ease}
+.key.down .kc{transform:translateY(4px)}
+
+/* the note beside the turned canvas: real HTML so it can be read and clicked */
+#insp{position:absolute;z-index:4;width:260px;padding:16px 18px 14px;background:var(--chalk);color:var(--ink);font:400 18px/1.4 var(--serif);clip-path:polygon(0 3%,5% 0,34% 2%,66% 0,100% 2%,99% 45%,100% 97%,68% 100%,36% 98%,3% 100%,1% 55%);animation:fin2 .5s ease 1.2s both}
+#insp[hidden]{display:none}
+@media (max-width:899px),(orientation:portrait){#insp{font-size:15px;line-height:1.35;padding:10px 12px 9px}}
+#insp a{display:inline-block;min-height:44px;line-height:44px;margin:-8px 0;font-weight:700;color:var(--ver-text);text-decoration:underline;text-underline-offset:.2em;text-decoration-thickness:2px}
+#insp a:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+@keyframes fin2{from{opacity:0;transform:translateY(6px)}}
+
+#exit{position:absolute;z-index:4;right:1.5%;bottom:9%;width:min(300px,40%);padding:18px 20px;background:var(--chalk);color:var(--ink);clip-path:polygon(0 3%,6% 0,32% 2%,61% 0,100% 2%,99% 40%,100% 97%,70% 100%,38% 98%,4% 100%,1% 60%)}
+#exit[hidden]{display:none}
+#exit a{display:flex;align-items:center;min-height:44px;font-size:16px;font-weight:500;word-break:break-all}
+
+/* ---------- the sheet: the canvas, pulled off the easel ---------- */
+.sheet{position:relative;z-index:5;margin-top:calc(var(--sw) * .9615);background:var(--chalk);padding:14px 24px 80px;min-height:calc(100svh - var(--sw) * .9615 + 40px)}
+.sheet>.inner{max-width:30rem}
+.medge{position:absolute;left:0;top:-47px;width:100%;height:48px;display:block;pointer-events:none;overflow:visible}
+.dedge,.dshade{display:none}
+.sheet.peek,.sheet{transition:transform .32s ease}
+body.peek .sheet{transform:translateY(max(0px,calc(88svh - var(--sw) * .9615 + 35px)))}
+
+.id h1{margin:12px 0 0;font:400 clamp(34px,10vw,40px)/1.05 var(--serif);letter-spacing:-.005em}
+.role{margin:14px 0 0;font-size:clamp(18px,5.2vw,21px);font-weight:500;line-height:1.3}
+.traits{margin:6px 0 0;font-size:clamp(16px,4.4vw,18px);line-height:1.35}
+.id h1.hl{text-decoration:underline 3px var(--ver);text-underline-offset:.14em}
+.aside{margin:6px 0 0;font-size:15px;line-height:1.35;color:var(--soft)}
+.mail{margin:26px 0 0;font-size:clamp(18px,5vw,20px);font-weight:500;line-height:1.3;word-break:break-word}
+.more{margin:8px 0 0;font-size:17px}
+.id a,.end a,.aside a{text-decoration:underline;text-underline-offset:.22em;text-decoration-thickness:max(1px,.07em)}
+.id a:hover,.end a:hover,.drops a:hover,.proj a:hover{text-decoration-thickness:max(2px,.12em);color:var(--ver-text)}
+.human{margin:54px 0 0;font:400 clamp(19px,5.4vw,22px)/1.42 var(--serif);max-width:26em}
+.u{text-decoration:underline 3px transparent;text-underline-offset:.28em;transition:text-decoration-color .2s}
+.hl .u{text-decoration-color:var(--ver)}
+.blk{margin-top:64px}
+.sh{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 18px;margin-bottom:22px}
+.sh h2{margin:0;font:400 clamp(24px,6.6vw,28px)/1.15 var(--serif)}
+.sh p{margin:0;font-size:16px;color:var(--soft)}
+.drops,.proj{list-style:none;margin:0;padding:0}
+.drops li{display:grid;grid-template-columns:1fr;gap:2px;padding:0 0 22px;position:relative}
+.drops time{font-size:13px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--soft)}
+.drops a{font-weight:500;font-size:17px;line-height:1.35;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.2em}
+.ap{margin:5px 0 0;font:400 16px/1.45 var(--serif);color:#2a2e29}
+.drops li.new time{color:var(--ver-text)}
+.drops li.new time::before{content:"";display:inline-block;width:9px;height:9px;margin-right:8px;background:var(--ver);transform:rotate(45deg) translateY(-1px)}
+.proj li{padding:0 0 22px}
+.proj .yr{display:block;padding:0 0 3px;font-size:13px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--soft)}
+.proj .nm{font:400 21px/1.2 var(--serif);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.2em}
+.proj li.hl .nm{text-decoration-color:var(--ver);text-decoration-thickness:3px}
+.proj p{margin:5px 0 0;font-size:16px;line-height:1.5}
+.end{margin:56px 0 0;font-size:19px;font-weight:500;word-break:break-word}
+.else{margin:14px 0 0;font-size:15px;line-height:1.45;color:var(--soft);word-break:break-word}
+.else a{text-decoration:underline;text-underline-offset:.2em;padding:6px 0}
+.else.hl{outline:2px solid var(--ochre);outline-offset:4px}
+
+
+/* ---------- paint dabs: one loaded-brush touch beside each date ---------- */
+.river .drops li{display:grid;grid-template-columns:40px 1fr;column-gap:12px;align-items:start;padding:0;margin:0 0 30px;min-height:44px}
+.river .drops li:last-child{margin-bottom:8px}
+.river .drops li>div{grid-column:2;grid-row:2;display:block}
+.river .drops time{grid-column:2;grid-row:1;display:block;padding:0 0 3px;font-size:14px}
+.river .drops li.new time{color:var(--soft)}
+.river .drops li.new time::before{display:none}
+.river .drops a{display:inline-block;padding:2px 0}
+.river .all{margin:0 0 0 52px;font-size:17px}
+.river .all a{display:inline-flex;align-items:center;min-height:44px;font-weight:500;color:var(--ver-text);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.2em}
+.river .all a:hover{text-decoration-thickness:max(2px,.12em)}
+.river .all a:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.river .drops a:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.river .ap{font-size:15px;line-height:1.4;margin-top:3px}
+.dab{grid-column:1;grid-row:1 / span 2;width:30px;height:30px;margin:-3px 0 0 3px;overflow:visible;pointer-events:none}
+.dab .bd{stroke:rgba(13,51,41,.28);stroke-width:.7;stroke-linejoin:round}
+.dab .sl{fill:none;stroke:#fff;stroke-opacity:.28;stroke-width:.9;stroke-linecap:round}
+.dab .sk{fill:none;stroke:#000;stroke-opacity:.22;stroke-width:.8;stroke-linecap:round}
+.dab.c0 .bd{fill:var(--ver)}.dab.c1 .bd{fill:var(--ochre)}.dab.c2 .bd{fill:var(--green)}.dab.c3 .bd{fill:var(--deep)}.dab.c4 .bd{fill:#8a8f84}
+.dab .sh2{display:none}
+.dab.wet{filter:drop-shadow(0 1.5px 0 rgba(13,51,41,.45)) drop-shadow(0 3px 2px rgba(13,51,41,.25))}
+.dab.wet .bd{stroke:rgba(255,255,255,.35);stroke-width:1.1}
+.dab.wet .sh2{display:block;fill:none;stroke:#fff8e6;stroke-opacity:.9;stroke-width:2.2;stroke-linecap:round}
+.dab.wet .sh2{transition:opacity .25s}
+li:hover .dab.wet .sh2,li:focus-within .dab.wet .sh2{opacity:.55}
+@media (max-width:599px){.river .all{margin-left:40px}.river .drops li{grid-template-columns:30px 1fr;column-gap:10px}.dab{width:22px;height:22px;margin:-1px 0 0 2px}}
+.river+.blk{margin-top:52px}
+.human{margin-top:56px}
+
+@media (min-width:600px) and (max-width:899px),(min-width:600px) and (orientation:portrait){.sheet{padding-left:max(24px,calc(50vw - 15rem));padding-right:24px}}
+
+/* ---------- wide: sheet on the left, torn once, painting on the right ---------- */
+@media (min-width:900px) and (orientation:landscape){
+  :root{--pw:clamp(340px,37.5vw,900px);--ew:calc(var(--pw) * .222)}
+  .stage{left:0;width:auto;right:0;height:auto;bottom:0;transform:none}
+  .room.sp{display:none}.room.sw{display:block}
+  /* Anchor the painting to the right edge (the door lives there; the sheet covers the left). Below 1.6:1 the width stays at 1.6x height so nothing crops; above 1.78:1 it stops growing so ultrawide crops no more than 16:9 does. */
+  .room.sw{inset:0 0 0 auto;width:max(160vh,min(100%,178vh))}
+  .sheet{position:fixed;left:0;top:0;bottom:0;width:var(--pw);margin:0;min-height:0;overflow-y:auto;overflow-x:hidden;padding:64px 3vw 96px clamp(36px,4.4vw,72px);scrollbar-width:none;transition:none}
+  .sheet::-webkit-scrollbar{display:none}
+  .sheet>.inner{max-width:none}
+  .medge{display:none}
+  .dedge,.dshade{display:block;position:fixed;top:0;bottom:0;left:calc(var(--pw) - 1px);width:var(--ew);height:100vh;pointer-events:none}
+  .dedge{z-index:5}.dshade{z-index:4}
+  .id h1{margin-top:0;font-size:clamp(38px,3.2vw,50px)}
+  .role{font-size:clamp(19px,1.45vw,22px)}
+  .mail{font-size:clamp(19px,1.4vw,21px)}
+  .human{font-size:clamp(19px,1.5vw,23px)}
+  .drops li{grid-template-columns:7.6rem 1fr;gap:0 4px}
+  .drops time{padding-top:3px}
+  .blk{margin-top:60px}
+  body.peek .sheet{transform:none}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .dab .sh2{transition:none}
+  .room,.grain{animation:none}
+  .sheet,.wallart,.pupil,.fh,.flip,.mv,.sl,.u,.face,.mouth,.eye,.chk,.p-turn,.p-body,.cvb,.cvf,.key .kc,.karm{transition:none!important}
+  .fig .fh,.c1,.c2,.bz,.karm,.room .wob,.room .cue *,.cl,.cl2,.co,.nf,.wipe,#insp{animation:none!important}
+  .stage .p-turn{transform:scaleX(-.82)}
+  html{scroll-behavior:auto}
+}
+
+/* ---------- footer nav, same as the sheet pages ---------- */
+.foot{margin-top:44px}
+.foot nav{position:relative}
+.foot .hair{position:absolute;left:0;top:0;width:100%;height:8px;color:var(--ink);opacity:.55;overflow:visible}
+.foot nav ul{list-style:none;margin:0;padding:8px 0 0;display:flex;flex-wrap:wrap;gap:0 24px}
+.foot nav a{display:inline-flex;align-items:center;min-height:44px;font-weight:500;color:var(--ver-text);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.2em}
+.foot nav a:hover{text-decoration-thickness:2px}
+.foot nav a[aria-current="page"]{color:var(--ink);text-decoration-color:var(--ver);text-decoration-thickness:3px}
+
+/* ---------- menu chip: pinned to the sheet's top-right corner so the name keeps its full width ---------- */
+.sheet>.inner{position:relative}
+.menu{position:absolute;float:none;top:6px;right:0;margin:0}

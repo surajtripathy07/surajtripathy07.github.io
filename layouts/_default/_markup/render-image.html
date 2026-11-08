@@ -1,0 +1,15 @@
+{{- /* Page-resource images become resized webp with a 720w srcset; remote and non-resource images pass through. */ -}}
+{{- $dest := .Destination -}}
+{{- $img := "" -}}
+{{- if and $dest (not (hasPrefix $dest "http")) (not (hasPrefix $dest "/")) (not (hasPrefix $dest "data:")) -}}
+{{- with .Page.Resources.Get $dest }}{{ if in (slice "image/png" "image/jpeg") .MediaType.Type }}{{ $img = . }}{{ end }}{{ end -}}
+{{- end -}}
+{{- if $img -}}
+{{- $n := .Page.Store.Get "imgn" | default 0 -}}
+{{- .Page.Store.Set "imgn" (add $n 1) -}}
+{{- $big := $img -}}{{- if gt $img.Width 1200 }}{{ $big = $img.Resize "1200x webp q80" }}{{ else }}{{ $big = $img.Resize (printf "%dx webp q80" $img.Width) }}{{ end -}}
+{{- $small := $img.Resize "720x webp q80" -}}
+<img src="{{ $big.RelPermalink }}"{{ if gt $img.Width 720 }} srcset="{{ $small.RelPermalink }} 720w, {{ $big.RelPermalink }} {{ $big.Width }}w" sizes="(max-width: 52rem) 100vw, 640px"{{ end }} width="{{ $big.Width }}" height="{{ $big.Height }}" alt="{{ .Text }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if gt $n 0 }} loading="lazy"{{ end }}>
+{{- else -}}
+<img src="{{ $dest | safeURL }}" alt="{{ .Text }}"{{ with .Title }} title="{{ . }}"{{ end }}>
+{{- end -}}

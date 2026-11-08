@@ -7,23 +7,47 @@ Things I've built end to end, mostly by directing AI coding agents rather than t
 
 ## Membral
 
+{{< when "Sep 2026 – now" >}}
+
 *Your coding agent answers from what past sessions found.*
 
 Every coding harness keeps its own transcripts in its own format, on one machine, until it prunes them. Membral sits underneath all of them. One command per harness, then every session from Claude Code, opencode, GitHub Copilot and Codex CLI lands in one Postgres store, normalised into one shape: turns in order, models, token usage, tools called, files touched, the sub-agent tree and a server-side cost figure. A session that needs the past pulls it back over MCP: decisions and settled designs, issues and PRs worked on, outcomes, dead ends, what a parallel session did today. It hands the agent the link; the agent checks live state itself.
 
-Measured on five frozen tasks, five runs each with and without Membral: the median answer got at least one more fact right on four of five, with no harmful answer in 25 runs. For an Opus session that delegates to sub-agents, Membral answered from recorded sessions in 0.30 to 0.37x the wall time. Cost comes out about even, and it does not help a session resume after a context compaction; the eval write-ups in the repo say where it falls short.
+Measured on five frozen tasks, five runs each with and without Membral: the median answer got at least one more fact right on four of five, with no harmful answer in 25 runs. For an Opus session that delegates to sub-agents, Membral answered from recorded sessions in 0.30 to 0.37x the wall time.
 
-In use on every session I run since August 2026. Built solo by directing agents, with the data model and the judgment calls mine. MIT.
+In use on every session I run since September 2026. Built solo by directing agents, with the data model and the judgment calls mine. MIT.
 
 [Source on GitHub →](https://github.com/surajtripathy07/membral) &middot; [membral.me →](https://membral.me)
 
 **Stack:** TypeScript, Postgres (Supabase), MCP server, Claude Code plugin, CLI.
 
+## Mumbai Circuit Planner
+
+{{< when "Apr 2026" >}}
+
+Google Maps optimizes for speed: the fastest way from A to B. What I wanted was different, a 40-minute to hour-long leisure drive with my kid and wife that starts and ends at home, avoids traffic, and isn't just the same road there and back. A single-file tool on top of the Google Maps Directions API that nudges a destination point outward to force a circular route, optimized for low traffic instead of the shortest path.
+
+[Try it →](/circuit-route-mumbai/)
+
+## Promptly
+
+{{< when "Jul 2025" >}}
+
+*Upgrade everyday prompts into expert-level instructions.*
+
+A Chrome extension that sharpens a rough prompt right where you're typing it. Select your text in ChatGPT, Claude, Gemini, Grok, or Copilot, hit Cmd/Ctrl+E, and it rewrites the prompt into a more precise instruction, with optional controls for intent, role, format, tone, and constraints when you want to steer the rewrite. Your API key is stored locally, and only ever goes to the model you're talking to.
+
+[Get the extension →](https://chromewebstore.google.com/detail/promptly-enhance-your-pro/jepfpialangjoaddkjjiahijbelpggpo)
+
+**Stack:** Chrome Extension (MV3).
+
 ## Staytion
+
+{{< when "May 2025 – now" "Android app Feb 2026 · OpenClaw agent Jul 2026 · Sally Oct 2026" >}}
 
 *A coliving business that runs on an agent.*
 
-[Staytion](https://staytioncoliving.com) is a paying-guest coliving business in Mumbai: 33 flats and 318 beds that my family and I sell through one pipeline, five of the flats mine. An agent on a dedicated WhatsApp number answers every inquiry, qualifies the lead, books the visit, follows up, chases rent, reads Aadhaar cards for onboarding, drives agreement signing and sends the owners a daily digest. It handled 941 inquiries in the last 90 days. The business takes about an hour of my day.
+[Staytion](https://staytioncoliving.com) is a paying-guest coliving business in Mumbai: 33 flats and 318 beds that my family and I sell through one pipeline, five of the flats mine. Two agents on a dedicated WhatsApp number do the work. Sally, our sales agent, answers every inquiry, qualifies the lead, books the visit and follows up. OpenClaw holds the gate: every message goes out through it, Sally's included. It also chases rent, drives agreement signing and sends the owners a daily digest. The business takes about an hour of my day.
 
 It went live in shadow mode first, drafting replies a human approved, with a kill switch that pauses all outbound messages and a hard rule that anything touching money waits for a person. Private repo.
 
@@ -43,6 +67,8 @@ The app itself started as just a call log, so I could jump from an incoming call
 
 ## GeniusAIx
 
+{{< when "May 2025" >}}
+
 *Summarize any YouTube video and ask it questions.*
 
 An AI learning layer for YouTube: toggle it on any captioned video and it turns the transcript into AI summaries, "ask anything" Q&A, smart highlights that jump you straight to the key moments, and auto-generated quizzes to test what actually stuck, all from a clean, collapsible sidebar. I shipped this before YouTube had its own in-video AI Q&A; they added something similar a few months after it went live. I've since sunsetted it.
@@ -50,19 +76,3 @@ An AI learning layer for YouTube: toggle it on any captioned video and it turns 
 [geniusaix.com →](https://geniusaix.com/) &middot; [Chrome Web Store listing →](https://chromewebstore.google.com/detail/genius-aix-for-youtube-su/ddmilgmdhnppllhepeobhgjkfgkgnkeb) *(sunsetted, no longer maintained)*
 
 **Stack:** Chrome Extension (MV3), Firebase.
-
-## Mumbai Circuit Planner
-
-Google Maps optimizes for speed: the fastest way from A to B. What I wanted was different, a 40-minute to hour-long leisure drive with my kid and wife that starts and ends at home, avoids traffic, and isn't just the same road there and back. A single-file tool on top of the Google Maps Directions API that nudges a destination point outward to force a circular route, optimized for low traffic instead of the shortest path.
-
-[Try it →](/circuit-route-mumbai/)
-
-## Promptly
-
-*Upgrade everyday prompts into expert-level instructions.*
-
-A Chrome extension that sharpens a rough prompt right where you're typing it. Select your text in ChatGPT, Claude, Gemini, Grok, or Copilot, hit Cmd/Ctrl+E, and it rewrites the prompt into a more precise instruction, with optional controls for intent, role, format, tone, and constraints when you want to steer the rewrite. Your API key is stored locally, and only ever goes to the model you're talking to.
-
-[Get the extension →](https://chromewebstore.google.com/detail/promptly-enhance-your-pro/jepfpialangjoaddkjjiahijbelpggpo)
-
-**Stack:** Chrome Extension (MV3).

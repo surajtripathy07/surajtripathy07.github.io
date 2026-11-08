@@ -1,0 +1,5 @@
+{{- /* Concatenate, minify and fingerprint a list of stylesheets: dict "name" "site" "files" (slice "css/a.css" ...) */ -}}
+{{- $parts := slice -}}
+{{- range .files }}{{ $parts = $parts | append (resources.Get .) }}{{ end -}}
+{{- $css := resources.Concat (printf "css/%s.css" .name) $parts | minify | fingerprint -}}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">

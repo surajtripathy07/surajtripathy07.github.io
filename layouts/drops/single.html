@@ -1,0 +1,18 @@
+{{ define "main" }}
+<h1>{{ .Title }}</h1>
+<p class="byline"><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 January 2006" }}</time></p>
+<div class="prose drop">
+{{ .Content }}
+</div>
+{{- $all := (where site.RegularPages "Section" "drops").ByDate }}
+{{- $older := slice }}{{ $newer := slice }}
+{{- range $i, $p := $all }}{{ if eq $p.RelPermalink $.RelPermalink }}
+{{- if gt $i 0 }}{{ $older = slice (index $all (sub $i 1)) }}{{ end }}
+{{- if lt (add $i 1) (len $all) }}{{ $newer = slice (index $all (add $i 1)) }}{{ end }}
+{{- end }}{{ end }}
+<nav class="dropnav" aria-label="More drops">
+{{- range $older }}<a class="dn-older" rel="prev" href="{{ .RelPermalink }}">&larr; Older: {{ .Title }}</a>{{ end }}
+{{- range $newer }}<a class="dn-newer" rel="next" href="{{ .RelPermalink }}">Newer: {{ .Title }} &rarr;</a>{{ end }}
+<a class="dn-all" href="{{ "drops/" | relURL }}">All drops</a>
+</nav>
+{{ end }}

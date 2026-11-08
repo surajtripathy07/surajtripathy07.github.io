@@ -1,0 +1,8 @@
+/* Design tokens and the few rules every page shares. The palette is fixed: no colour-scheme switch. */
+:root{
+  --ink:#121512; --green:#17503f; --deep:#0d3329; --ochre:#c79a35; --chalk:#efe9d8; --rim:#f7f3e8;
+  --ver:#d63a1f; --ver-text:#a92b14; --soft:#3b4039;
+  --serif:'Young Serif',Georgia,serif; --sans:'Hanken Grotesk',system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{background:var(--deep)}

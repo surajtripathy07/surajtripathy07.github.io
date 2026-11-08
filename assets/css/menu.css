@@ -1,0 +1,23 @@
+/* Burger menu on every page, floated top-right inside the chalk sheet (never over a painting): a dark chip with three brush strokes, opening a torn chalk panel. Needs tokens.css. */
+.menu{position:relative;float:right;z-index:50;margin:0 0 .5rem 1rem;font-family:var(--sans)}
+.menu>summary{list-style:none;display:flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:50%;cursor:pointer;background:var(--deep);border:1.5px solid rgba(239,233,216,.28);box-shadow:0 2px 0 rgba(0,0,0,.25),0 4px 10px rgba(0,0,0,.35);-webkit-tap-highlight-color:transparent;user-select:none}
+.menu>summary::-webkit-details-marker{display:none}
+.menu>summary::marker{content:""}
+.menu>summary:hover{background:var(--green)}
+.menu>summary:focus-visible{outline:3px solid var(--ochre);outline-offset:3px}
+.mi{width:28px;height:28px;display:block;fill:none;stroke-width:3.2;stroke-linecap:round}
+.mi.cross{display:none}
+.menu[open]>summary .bars{display:none}
+.menu[open]>summary .cross{display:block}
+.mpanel{position:absolute;top:calc(100% + 10px);right:0;width:min(15.5rem,calc(100vw - 24px));filter:drop-shadow(0 6px 10px rgba(0,0,0,.38))}
+.mpanel nav{background:var(--chalk);color:var(--ink);padding:1.25rem 1rem 1.15rem 1.1rem;clip-path:polygon(0 2%,4% 0,18% 1.4%,36% 0,57% 1.6%,78% 0,100% 1.5%,99.2% 34%,100% 66%,98.8% 100%,74% 98.6%,52% 100%,30% 98.4%,9% 100%,0 98.5%,.8% 62%,0 30%)}
+.mpanel ul{list-style:none;margin:0;padding:0}
+.mpanel a{position:relative;display:flex;align-items:center;min-height:48px;padding:0 .35rem 0 1.4rem;font:400 1.3125rem/1.2 var(--serif);color:var(--ink);text-decoration:none}
+.mpanel a:hover{text-decoration:underline;text-decoration-color:var(--ver);text-decoration-thickness:2px;text-underline-offset:.25em}
+.mpanel a:focus-visible{outline:3px solid var(--ink);outline-offset:-3px;border-radius:2px}
+.mpanel a[aria-current="page"]{text-decoration:underline;text-decoration-color:var(--ver);text-decoration-thickness:3px;text-underline-offset:.28em}
+.mpanel a[aria-current="page"]::before{content:"";position:absolute;left:.4rem;top:50%;width:.55rem;height:.55rem;margin-top:-.275rem;background:var(--ver);transform:rotate(45deg)}
+@media (prefers-reduced-motion:no-preference){
+  .menu[open] .mpanel{animation:mpop .18s ease-out both}
+  @keyframes mpop{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+}

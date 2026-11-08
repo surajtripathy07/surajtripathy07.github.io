@@ -1,0 +1,8 @@
+{{- /* {{< ledger "key" >}}: rows from front matter ledgers.<key>: name, when, who, kind (ask or self), desc (markdown) */ -}}
+{{- $rows := index .Page.Params.ledgers (.Get 0) -}}
+<ol class="ledger">
+{{- range $i, $r := $rows }}
+<li class="row">{{ partial "art/hair.html" (add $i 1) }}<span class="nm">{{ $r.name }}</span><span class="when">{{ $r.when }}</span><span class="who {{ $r.kind }}">{{ $r.who }}</span><p class="desc">{{ $r.desc | markdownify }}</p></li>
+{{- end }}
+<li class="row end">{{ partial "art/hair.html" (add (len $rows) 1) }}</li>
+</ol>
