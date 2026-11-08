@@ -41,7 +41,6 @@ svg text{font-family:var(--serif)}
 @keyframes turn{0%,45%{transform:scaleX(1)}55%,80%{transform:scaleX(.92)}90%,100%{transform:scaleX(1)}}
 .wallart .mv{transition:transform .45s ease}.wallart.on .mv{transform:translateY(var(--mv))}
 .wallart .sl{transition:transform .5s ease}.wallart.on .sl{transform:translateX(var(--sl))}
-.plq{font-family:var(--serif);font-size:calc(14.5px / var(--s,1));fill:var(--chalk);letter-spacing:.01em;paint-order:stroke;stroke:var(--ink);stroke-width:2.8px;stroke-linejoin:round}
 
 
 /* the face follows the pointer a little (set from script) */
@@ -88,7 +87,6 @@ svg text{font-family:var(--serif)}
 .nf{font-size:17px;fill:var(--ink)}
 .cl{fill:none;stroke:var(--ink);stroke-width:.9;stroke-dasharray:3 2.5;opacity:.5}
 .cl2{fill:none;stroke:var(--ink);stroke-width:1.1;opacity:.8}
-.co{font-family:var(--sans);font-size:9.4px;fill:var(--ink);opacity:.85;font-variant-numeric:tabular-nums}
 .wob{transform-box:view-box}
 .cue .star{transform-box:fill-box;transform-origin:50% 50%}
 .cue .sheen{transform:translateX(-60px)}
@@ -97,7 +95,6 @@ svg text{font-family:var(--serif)}
 @keyframes pulse{0%,60%,100%{transform:scale(1)}20%{transform:scale(1.35) rotate(12deg)}}
 .turned .cl,.turned .cl2{animation:fin .4s ease-out .76s both}
 .turned .wipe{animation:wipe .8s ease-in-out 1s both}
-.turned .co{animation:fin .35s ease-out 1.75s both}
 .turned .nf{animation:fin .35s ease-out 2.1s both}
 .wipe{transform-box:fill-box;transform-origin:50% 0}
 @keyframes fin{from{opacity:0}}
@@ -217,7 +214,7 @@ li:hover .dab.wet .sh2,li:focus-within .dab.wet .sh2{opacity:.55}
   .dab .sh2{transition:none}
   .room,.grain{animation:none}
   .sheet,.wallart,.pupil,.fh,.flip,.mv,.sl,.u,.face,.mouth,.eye,.chk,.p-turn,.p-body,.cvb,.cvf,.key .kc,.karm{transition:none!important}
-  .fig .fh,.c1,.c2,.bz,.karm,.room .wob,.room .cue *,.cl,.cl2,.co,.nf,.wipe,#insp{animation:none!important}
+  .fig .fh,.c1,.c2,.bz,.karm,.room .wob,.room .cue *,.cl,.cl2,.nf,.wipe,#insp{animation:none!important}
   .stage .p-turn{transform:scaleX(-.82)}
   html{scroll-behavior:auto}
 }

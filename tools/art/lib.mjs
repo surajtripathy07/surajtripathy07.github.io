@@ -112,14 +112,14 @@ const PF = { c1: C.chalk, c2: C.lit, c3: C.ver, c4: C.ink, cn: C.chalk, mood: 'w
 // ---- wall paintings: same graphic language (planes, heavy cut outline) ----
 let clipN = 0;
 const Pq = (pts, fill, o = {}) => P(pts, fill, { amp: 0.7, seg: 14, st: 1.5, ...o });
-function frame(id, x, y, w, h, bg, paint, label, endLabel) {
+function frame(id, x, y, w, h, bg, paint, label) {
   const ix = x + 9, iy = y + 9, iw = w - 18, ih = h - 18, cid = 'fc' + clipN++;
   const u = (f) => ix + f * iw, v = (f) => iy + f * ih;
   return `<g class="hot wallart" id="${id}" tabindex="0" role="button" aria-label="${label || 'Painting'}" data-ix="${ix}" data-iy="${iy}" data-iw="${iw}" data-ih="${ih}">
 <g class="fr">${P(rect(x, y, w, h), C.ochre, { amp: 1.6, sh: [3, 4], sho: 0.4, st: 2 })}${P(rect(ix - 1, iy - 1, iw + 2, ih + 2), C.ink, { amp: 1 })}</g>
 <clipPath id="${cid}"><rect x="${ix}" y="${iy}" width="${iw}" height="${ih}"/></clipPath>
 <g clip-path="url(#${cid})">${P(rect(ix, iy, iw, ih), bg, { amp: 1, seg: 30 })}${paint(u, v, iw, ih, ix, iy)}</g>
-${label ? `<text class="plq" x="${endLabel ? x + w - 2 : x + 2}" y="${y + h + 24}"${endLabel ? ' text-anchor="end"' : ''}>${label}</text>` : ''}<rect class="ring" x="${x - 6}" y="${y - 6}" width="${w + 12}" height="${h + 12}"/>
+<rect class="ring" x="${x - 6}" y="${y - 6}" width="${w + 12}" height="${h + 12}"/>
 <rect class="hit" x="${x - 4}" y="${y - 4}" width="${w + 8}" height="${h + 8}"/>
 </g>`;
 }

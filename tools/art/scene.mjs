@@ -159,11 +159,10 @@ function construct(fstr) {
   let s = g(0, -40, 0, 36) + g(-34, -9, 34, -9) + g(-34, 14, 34, 14) + `<path d="M-25 -29H25V29H-25Z" class="cl"/>`;
   const Lp = pts.map(([x, y]) => [-x, y]);
   const pick = [Lp.reduce((a, p) => (p[0] < a[0] ? p : a)), Lp.reduce((a, p) => (p[1] > a[1] ? p : a)), Lp.reduce((a, p) => (p[0] > a[0] ? p : a))];
-  const labs = [[-1, 0, 'end'], [-1, 20, 'end'], [1, 0, 'start']];
+  const ticks = [[-1, 0], [-1, 20], [1, 0]];
   pick.forEach(([lx, ly], i) => {
-    const o = pts.find(([x, y]) => -x === lx && y === ly);
-    const [dx, dy, an] = labs[i];
-    s += `<path d="M${lx - 2} ${ly}h4M${lx} ${ly - 2}v4" class="cl2"/>${g(lx, ly, lx + dx * 7, ly + dy * 0.5)}<text class="co" text-anchor="${an}" x="${lx + dx * 9}" y="${ly + dy * 0.5 - 1}">x ${o[0]}</text><text class="co" text-anchor="${an}" x="${lx + dx * 9}" y="${ly + dy * 0.5 + 9}">y ${o[1]}</text>`;
+    const [dx, dy] = ticks[i];
+    s += `<path d="M${lx - 2} ${ly}h4M${lx} ${ly - 2}v4" class="cl2"/>${g(lx, ly, lx + dx * 7, ly + dy * 0.5)}`;
   });
   return s;
 }
@@ -259,11 +258,11 @@ export function scene(L) {
     add(P([[1352, floorY], [1424, floorY], [1440, floorY + 70], [1290, floorY + 70]], C.lit, { amp: 1.2 }));
   }
 
-  const fr = (id, x, y, w, h, bg, fn, label, endLabel) => frame(id + '-' + L, x, y, w, h, bg, fn, label, endLabel);
+  const fr = (id, x, y, w, h, bg, fn, label) => frame(id + '-' + L, x, y, w, h, bg, fn, label);
   if (p) {
     add(shelf(14, 98, .8, L));
     add(fr('art-mem', 270, 8, 102, 88, C.deep, paintMem, 'Membral'));
-    add(fr('art-whim', 222, 12, 38, 80, C.deep, paintWhim, 'Whimsical', true));
+    add(fr('art-whim', 222, 12, 38, 80, C.deep, paintWhim, 'Whimsical'));
     add(keyboard(L, 176, 128, 40, 34));
   } else {
     add(shelf(1036, 424, 1.0, L));
@@ -271,7 +270,7 @@ export function scene(L) {
     add(fr('art-geni', 886, 68, 140, 130, C.deep, paintGeni, 'GeniusAIx'));
     add(fr('art-road', 1052, 80, 164, 116, C.linen, paintRoad, 'Mumbai Circuit Planner'));
     add(mirror('w', 1262, 96, 64, 96));
-    add(fr('art-whim', 1344, 84, 62, 108, C.deep, paintWhim, 'Whimsical', true));
+    add(fr('art-whim', 1344, 84, 62, 108, C.deep, paintWhim, 'Whimsical'));
     add(keyboard(L, 1030, 246, 52, 58));
   }
   add(door(L, ...(p ? [214, 172, 54, 140] : [1310, 300, 104, 496]), !p));
