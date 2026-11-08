@@ -1,0 +1,16 @@
+<footer class="foot">
+<nav aria-label="Site">
+{{ partial "art/hair.html" 0 }}
+<ul>
+{{ partial "nav-list.html" . }}</ul>
+<ul class="else">
+<li><a href="https://youtube.com/@whimsicallearnings">whimsicallearnings on YouTube</a></li>
+<li><a href="https://www.instagram.com/whimsicallearnings/">Instagram</a></li>
+</ul>
+<ul class="social">
+{{- range sort site.Params.social "weight" }}
+<li><a href="{{ .url }}">{{ .name }}</a></li>
+{{- end }}
+</ul>
+</nav>
+</footer>

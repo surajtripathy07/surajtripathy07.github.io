@@ -1,0 +1,2 @@
+{{- /* A vermilion brush underline for h2, picked from the generated pool. Pass an integer. */ -}}
+{{- index hugo.Data.art.ul (mod . (len hugo.Data.art.ul)) | safeHTML -}}

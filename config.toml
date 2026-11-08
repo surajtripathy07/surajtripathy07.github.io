@@ -1,12 +1,15 @@
 baseURL = "https://surajtripathi.info/"
 title = "Suraj Tripathi"
-theme = "hugo-coder"
 locale = "en"
 defaultcontentlanguage = "en"
 enableEmoji=true
 
 [markup.highlight]
 style = "github-dark"
+
+# keep straight quotes and dashes exactly as written in the markdown
+[markup.goldmark.extensions.typographer]
+disable = true
 
 [params]
   author = "Suraj Tripathi"
@@ -19,18 +22,10 @@ style = "github-dark"
 
   enableTwemoji = true
 
-  colorScheme = "auto"
-  hidecolorschemetoggle = false
-
-  customCSS = ["css/custom.css"]
-  # customSCSS = ["scss/custom.scss"]
-  # customJS = ["js/custom.js"]
+  email = "surajtripathi793@gmail.com"
 
 [taxonomies]
-  category = "categories"
-  series = "series"
   tag = "tags"
-  author = "authors"
 
 # Social links
 [[params.social]]
@@ -54,26 +49,34 @@ style = "github-dark"
   weight = 3
   url = "https://www.linkedin.com/in/surajtripathi793/"
 
-# Menu links
+# Menu links (sheet footer, in this order)
 [[menu.main]]
-  name = "Blog"
+  name = "Home"
   weight = 1
-  url  = "posts/"
+  url = "/"
 [[menu.main]]
   name = "Projects"
   weight = 2
   url = "projects/"
 [[menu.main]]
-  name = "About"
+  name = "Drops"
   weight = 3
+  url = "drops/"
+[[menu.main]]
+  name = "Posts"
+  weight = 4
+  url = "posts/"
+[[menu.main]]
+  name = "About"
+  weight = 5
   url = "about/"
 [[menu.main]]
-  name = "Drops"
-  weight = 4
-  url = "drops/"
+  name = "Clankers"
+  weight = 6
+  url = "clankers/"
 
 [pagination]
-  pagerSize = 20
+  pagerSize = 10
 
 [services.disqus]
   shortname = "surajtripathi-info"
@@ -81,3 +84,7 @@ style = "github-dark"
 [module]
 [module.hugoVersion]
 min = "0.77.0"
+
+# HTML and SVG minify are on. Do not put an <svg> inside another <svg> in generated art: tdewolff's HTML minifier leaves SVG mode
+# at the inner </svg> and then drops the "/" of later self-closing tags (<path .../> becomes <path ...>), so figures nest and vanish.
+[minify]

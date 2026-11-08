@@ -1,0 +1,14 @@
+{{ define "main" }}
+<h1>{{ .Title }}</h1>
+{{ with .Params.lead }}<p class="lead">{{ . | markdownify }}</p>{{ end }}
+{{ with .Content }}<div class="prose">{{ . }}</div>{{ end }}
+<ol class="entries">
+{{- range .Pages.ByDate.Reverse }}
+<li>
+<time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 Jan 2006" }}</time>
+<a class="entry-title" href="{{ .RelPermalink }}">{{ .Title }}</a>
+{{ with or .Params.summary .Params.description }}<p>{{ . }}</p>{{ end }}
+</li>
+{{- end }}
+</ol>
+{{ end }}

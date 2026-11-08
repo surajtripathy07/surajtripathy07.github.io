@@ -11,9 +11,9 @@ Everything here comes from a few projects I run on my own. If a post names one o
 
 | Name | What it is | Why it exists |
 |---|---|---|
-| **The hostel business** | Paying-guest flats in Mumbai, with beds rented by the month. | It is my side business. Most of the tools below exist so it runs on a few minutes of my day. |
+| **The hostel business** ([Staytion](https://staytioncoliving.com)) | Paying-guest flats in Mumbai, with beds rented by the month. | It is my side business. Most of the tools below exist so it runs on a few minutes of my day. |
 | **Sally** | A sales agent on WhatsApp. It reaches out to people looking for a bed, follows up, answers their questions and books a visit to the flat. | Leads go cold in hours, and a fast reply or a timely follow-up decides who books. |
-| **The PG ops agent** | A bot on a schedule that sends rent reminders, chases tenant paperwork and sends me a daily summary. | The work is small but it repeats every month, and it is easy to forget. |
+| **The PG ops agent** (OpenClaw) | A bot on a schedule that sends rent reminders, chases tenant paperwork and sends me a daily summary. | The work is small but it repeats every month, and it is easy to forget. |
 | **[Membral](https://github.com/surajtripathy07/membral)** | A memory layer that saves your AI coding chats so you can search them later. Open source. | I kept solving the same problem twice because the answer was buried in an old chat. |
 
-Sally and the PG ops agent are private. Membral is public, and the link above goes to its code.
+Sally's and OpenClaw's code is private. Membral is public, and the link above goes to its code.

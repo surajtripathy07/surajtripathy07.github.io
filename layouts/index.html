@@ -1,0 +1,72 @@
+{{ define "css" }}
+{{ partial "css.html" (dict "name" "home" "files" (slice "css/tokens.css" "css/home.css" "css/menu.css")) }}
+{{- end }}
+
+{{ define "body" }}
+{{- $email := site.Params.email -}}
+<div class="stage" id="stage">
+{{ partial "art/home-scene.html" . }}
+  <div class="grain" aria-hidden="true"></div>
+  <button class="peekbtn" id="peekbtn" type="button" aria-pressed="false">Show the whole painting</button>
+  <div id="insp" hidden role="region" aria-label="About the canvas">If you know the inspiration for this, <a href="mailto:{{ $email }}">drop me a line</a>. We should chat!</div>
+  <div id="exit" hidden>
+    <a href="mailto:{{ $email }}">{{ $email }}</a>
+    <a href="{{ "projects/" | relURL }}">Things I've built</a>
+  </div>
+</div>
+
+{{ partial "art/home-edge-wide.html" . }}
+<main class="sheet" id="sheet" tabindex="0" aria-label="Suraj Tripathi">
+  {{ partial "art/home-edge-phone.html" . }}
+  <div class="inner">
+{{ partial "menu.html" . }}
+<header class="id">
+  <h1>Suraj Tripathi</h1>
+  <p class="role">I solve problems</p>
+  <p class="traits">Curious. Ambitious. Analytical. Restless.</p>
+  <p class="aside">(this is how my <a href="{{ "clankers/" | relURL }}">clankers</a> describe me)</p>
+  <p class="mail"><a href="mailto:{{ $email }}">{{ $email }}</a></p>
+  <p class="more"><a href="{{ "projects/" | relURL }}">Things I've built</a></p>
+</header>
+
+<section class="blk river" id="river" aria-labelledby="dh">
+  <div class="sh"><h2 id="dh">Drops</h2><p>One thing I made or fixed, most days.</p></div>
+  <ol class="drops">
+  {{- $drops := where site.RegularPages "Section" "drops" -}}
+  {{- range $i, $d := first 5 $drops.ByDate.Reverse }}
+    {{- /* the newest two also show their closing line: the paragraph before the final link */ -}}
+    {{- $ap := "" -}}
+    {{- if lt $i 2 -}}
+      {{- $paras := split (strings.TrimSpace $d.RawContent) "\n\n" -}}
+      {{- if gt (len $paras) 2 -}}{{- $ap = index $paras (sub (len $paras) 2) | plainify | strings.TrimSpace -}}{{- end -}}
+    {{- end }}
+    <li{{ if eq $i 0 }} class="new"{{ end }}>{{ index hugo.Data.dabs (mod $i (len hugo.Data.dabs)) | safeHTML }}<time datetime="{{ $d.Date.Format "2006-01-02" }}">{{ $d.Date.Format "2 Jan 2006" }}</time><div><a href="{{ $d.RelPermalink }}">{{ $d.Title }}</a>{{ with $ap }}<p class="ap">{{ . }}</p>{{ end }}</div></li>
+  {{- end }}
+  </ol>
+  <p class="all"><a href="{{ "drops/" | relURL }}">All {{ len $drops }} {{ if eq (len $drops) 1 }}drop{{ else }}drops{{ end }} &rarr;</a></p>
+</section>
+
+<section class="blk" aria-labelledby="ph">
+  <div class="sh"><h2 id="ph">Things I've built</h2></div>
+  <ul class="proj">
+    <li id="p-mem" data-frame="mem"><span class="yr">Sep 2026 – now</span><a class="nm" href="https://membral.me">Membral</a><p>A memory layer that saves your AI coding chats so you can search them later. <a href="https://github.com/surajtripathy07/membral">Open source</a>.</p></li>
+    <li id="p-road" data-frame="road"><span class="yr">Apr 2026</span><a class="nm" href="{{ "circuit-route-mumbai/" | relURL }}">Mumbai Circuit Planner</a><p>A single-file tool on top of the Google Maps Directions API that nudges a destination point outward to force a circular route, optimized for low traffic instead of the shortest path.</p></li>
+    <li id="p-pro"><span class="yr">Jul 2025</span><a class="nm" href="https://chromewebstore.google.com/detail/promptly-enhance-your-pro/jepfpialangjoaddkjjiahijbelpggpo">Promptly</a><p>Upgrade everyday prompts into expert-level instructions.</p></li>
+    <li id="p-geni" data-frame="geni"><span class="yr">May 2025</span><a class="nm" href="https://geniusaix.com/">GeniusAIx</a><p>Summarize any YouTube video and ask it questions. I've since sunsetted it.</p></li>
+  </ul>
+</section>
+
+<p class="human" id="human" data-chess><span class="u">When I'm away from a keyboard I'm a husband, a father, an audiobook addict, and a mediocre-but-committed chess player.</span></p>
+
+<p class="end"><a href="mailto:{{ $email }}">{{ $email }}</a></p>
+<p class="else" id="p-whim" data-frame="whim">Elsewhere: <a href="https://youtube.com/@whimsicallearnings">whimsicallearnings on YouTube</a> and <a href="https://www.instagram.com/whimsicallearnings/">Instagram</a>.</p>
+  <footer class="foot"><nav aria-label="Site">
+{{ partial "art/hair.html" 0 }}
+<ul>
+{{ partial "nav-list.html" . }}</ul>
+</nav></footer>
+  </div>
+</main>
+{{- $js := resources.Get "js/home.js" | minify | fingerprint }}
+<script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>
+{{- end }}

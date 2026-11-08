@@ -1,5 +1,6 @@
 ---
 title: About
+layout: about
 ---
 
 Hi, I'm Suraj. I've been writing code since 2015 and I'm still a generalist by choice: Java, Ruby, Python, Node, Objective-C, Android, and now whatever an AI agent and I can architect together. I've worked inside scrappy startups and large-scale platforms, sat close enough to product and design to care about the end result, and led a small team of junior developers for a year.
@@ -8,7 +9,7 @@ I build fast now by directing AI agents instead of typing every line myself. I o
 
 Most of what's on this site got built the same way. [See everything I've built →](/projects/)
 
-I also keep building outside work hours: a WhatsApp agent that runs the lead pipeline and rent collection for a coliving business, and a Chrome extension that let you ask questions about a YouTube video before YouTube shipped the same feature.
+I also run [Staytion](https://staytioncoliving.com), my paying-guest coliving business in Mumbai, with two agents doing the work: one handles the reminders, rent and agreement admin on WhatsApp, and Sally sells the empty beds. More on my [clankers](/clankers/). I also built a Chrome extension that let you ask questions about a YouTube video before YouTube shipped the same feature.
 
 I create content on [Instagram](https://www.instagram.com/whimsicallearnings/) and [Youtube](https://youtube.com/@whimsicallearnings?si=2jbHUO5joFHIq2ns), write about the interesting and painful parts of the job [on this blog](/posts/), and when I'm away from a keyboard I'm a husband, a father, an audiobook addict, and a mediocre-but-committed chess player.
 

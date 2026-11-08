@@ -1,0 +1,7 @@
+{{- /* The main menu as list items, current page marked. Pass the page: partial "nav-list.html" . */ -}}
+{{- $cur := .RelPermalink -}}
+{{- range site.Menus.main -}}
+{{- $href := .URL | relURL -}}
+{{- $here := or (eq $cur $href) (and (ne $href ("/" | relURL)) (hasPrefix $cur $href)) -}}
+<li><a href="{{ $href }}"{{ if $here }} aria-current="page"{{ end }}>{{ .Name }}</a></li>
+{{ end -}}

@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+{{ partial "head.html" . }}
+{{- block "css" . }}
+{{ partial "css.html" (dict "name" "site" "files" (slice "css/tokens.css" "css/site.css" "css/menu.css")) }}
+{{- end }}
+</head>
+<body>
+{{- block "body" . }}
+{{ partial "art/ground.html" . }}
+<div class="grain" aria-hidden="true"></div>
+{{ partial "sheet/home-link.html" . }}
+<div class="sheet">
+{{ partial "menu.html" . }}
+{{ partial "art/sheet-edges.html" . }}
+<main id="main">
+{{- block "main" . }}{{ end }}
+</main>
+{{ partial "sheet/footer.html" . }}
+</div>
+<div class="tail" aria-hidden="true"></div>
+{{- end }}
+{{- $mjs := resources.Get "js/menu.js" | minify | fingerprint }}
+<script src="{{ $mjs.RelPermalink }}" integrity="{{ $mjs.Data.Integrity }}" defer></script>
+</body>
+</html>

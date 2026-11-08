@@ -1,0 +1,6 @@
+{{- /* Title, optional lead line and markdown content on the sheet. Used by single.html and clankers.html. */ -}}
+<h1>{{ .Title }}</h1>
+{{ with .Params.lead }}<p class="lead">{{ . | markdownify }}</p>{{ end }}
+<div class="prose">
+{{ .Content }}
+</div>

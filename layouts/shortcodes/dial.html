@@ -1,0 +1,7 @@
+{{- /* The 24-hour dial; marks come from front matter dial: [{color, time, label}] */ -}}
+<div class="dial">{{ partial "art/clock.html" . }}
+<ul class="key" aria-label="Fixed daily times">
+{{- range .Page.Params.dial }}
+<li><i style="background:var(--{{ .color }})"></i><span class="t">{{ .time }}</span> {{ .label }}</li>
+{{- end }}
+</ul></div>

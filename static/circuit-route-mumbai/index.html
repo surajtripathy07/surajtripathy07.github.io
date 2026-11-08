@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <title>Mumbai Circuit Planner — Low-Traffic Drive Loops</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,16 +33,13 @@
       radial-gradient(circle at 20% 30%, rgba(232,71,31,0.04) 0%, transparent 50%),
       radial-gradient(circle at 80% 70%, rgba(11,13,14,0.03) 0%, transparent 50%);
   }
-  @media (max-width:900px){
-    body{grid-template-columns:1fr;grid-template-rows:auto 1fr}
-  }
-
   /* ─── Sidebar ─── */
   aside{
     background:var(--paper);
     border-right:1px solid var(--line);
     display:flex;flex-direction:column;
     height:100vh;
+    height:100dvh;
     overflow-y:auto;
   }
   .masthead{
@@ -107,7 +105,7 @@
   .icon-btn.loading svg{animation:spin 1s linear infinite}
 
   .time-row{
-    display:grid;grid-template-columns:1fr 1fr auto;gap:10px;align-items:end;
+    display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto;gap:10px;align-items:end;
   }
   .pill-btn{
     background:var(--ink);color:var(--paper);
@@ -117,6 +115,7 @@
     cursor:pointer;transition:background 0.15s;
     height:32px;
   }
+  .time-row input{min-width:0}
   .pill-btn:hover{background:var(--accent)}
 
   .hint{
@@ -233,7 +232,16 @@
 
   /* ─── Map ─── */
   main{position:relative}
-  #map{width:100%;height:100vh;background:#e8e4da}
+  #map{width:100%;height:100vh;height:100dvh;background:#e8e4da}
+
+  /* phone layout: must come after the base aside/#map rules to win the cascade */
+  @media (max-width:900px){
+    html,body{height:auto}
+    body{grid-template-columns:1fr;grid-template-rows:auto auto;overflow:visible;min-height:100vh}
+    aside{height:auto;overflow-y:visible;border-right:0}
+    main{height:70vh;height:70svh;min-height:360px}
+    main #map{height:100%}
+  }
 
   .map-overlay{
     position:absolute;bottom:24px;left:24px;
@@ -781,6 +789,9 @@
       computedVariants = results;
       selectedVariantIdx = 0;
       renderResults();
+      if (window.matchMedia('(max-width:900px)').matches) {
+        document.getElementById('results').scrollIntoView({behavior:'smooth', block:'start'});
+      }
 
     } catch (err) {
       console.error(err);

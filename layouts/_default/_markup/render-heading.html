@@ -1,0 +1,1 @@
+<h{{ .Level }} id="{{ .Anchor }}">{{ .Text | safeHTML }}{{ if eq .Level 2 }}{{ partial "art/ul.html" (add (len .Anchor) (mul 3 (len .Text))) }}{{ end }}</h{{ .Level }}>

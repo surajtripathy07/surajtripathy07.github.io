@@ -1,0 +1,36 @@
+{{ define "main" }}
+{{- $pg := .Paginate (.Pages.ByDate.Reverse) -}}
+<h1>{{ .Title }}</h1>
+{{ if eq $pg.PageNumber 1 }}
+{{ with .Content }}<div class="prose">{{ . }}</div>{{ end }}
+{{ else }}
+<p class="byline">Page {{ $pg.PageNumber }} of {{ $pg.TotalPages }}</p>
+{{ end }}
+<ol class="entries drops">
+{{- range $pg.Pages }}
+{{- $cover := .Resources.GetMatch "cover.png" }}
+{{- $close := "" }}
+{{- $ps := findRE `(?s)<p>.*?</p>` .Content }}
+{{- if ge (len $ps) 2 }}{{ $c := index $ps (sub (len $ps) 2) }}{{ if not (strings.Contains $c "<img") }}{{ $close = $c | plainify | htmlUnescape }}{{ end }}{{ end }}
+<li{{ if $cover }} class="has-thumb"{{ end }}>
+{{- with $cover }}{{ $t := .Fill "160x160 webp q80 Smart" }}<a class="thumb" href="{{ $.RelPermalink }}" tabindex="-1" aria-hidden="true"><img src="{{ $t.RelPermalink }}" width="{{ $t.Width }}" height="{{ $t.Height }}" alt="" loading="lazy"></a>{{ end }}
+<div class="entry-body">
+<time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 Jan 2006" }}</time>
+<a class="entry-title" href="{{ .RelPermalink }}">{{ .Title }}</a>
+{{ with $close }}<p>{{ . }}</p>{{ end }}
+</div>
+</li>
+{{- end }}
+</ol>
+{{- if gt $pg.TotalPages 1 }}
+<nav class="pager" aria-label="Drops pages">
+{{- if $pg.HasPrev }}<a class="pg-step" rel="prev" href="{{ $pg.Prev.URL }}">Newer</a>{{ else }}<span class="pg-step off" aria-hidden="true">Newer</span>{{ end }}
+<ul>
+{{- range $pg.Pagers }}
+<li>{{ if eq .PageNumber $pg.PageNumber }}<span class="pg-num cur" aria-current="page">{{ .PageNumber }}</span>{{ else }}<a class="pg-num" href="{{ .URL }}" aria-label="Page {{ .PageNumber }}">{{ .PageNumber }}</a>{{ end }}</li>
+{{- end }}
+</ul>
+{{- if $pg.HasNext }}<a class="pg-step" rel="next" href="{{ $pg.Next.URL }}">Older</a>{{ else }}<span class="pg-step off" aria-hidden="true">Older</span>{{ end }}
+</nav>
+{{- end }}
+{{ end }}

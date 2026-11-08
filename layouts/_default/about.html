@@ -1,0 +1,32 @@
+{{ define "css" }}
+{{ partial "css.html" (dict "name" "about" "files" (slice "css/tokens.css" "css/site.css" "css/about.css" "css/menu.css")) }}
+{{- end }}
+
+{{ define "body" }}
+{{ partial "art/ground.html" . }}
+<div class="grain" aria-hidden="true"></div>
+{{- /* the band sits over the scene here, so the home link is a chip in its corner */ -}}
+{{ partial "sheet/home-link.html" . }}
+<div class="scene" id="scene" data-s="day" style="--cutb:{{ partial "art/about-scene-cut.html" . | safeCSS }}">
+{{ partial "art/about-scene.html" . }}
+<div class="tod">
+<div class="seg" role="group" aria-label="Time of day in the scene">
+<button type="button" data-m="auto" aria-pressed="true">Auto</button>
+<button type="button" data-m="day" aria-pressed="false">Day</button>
+<button type="button" data-m="night" aria-pressed="false">Night</button>
+</div>
+<p class="nowtime" id="clock" hidden></p>
+</div>
+</div>
+<div class="sheet">
+{{ partial "menu.html" . }}
+{{ partial "art/sheet-edges.html" . }}
+<main id="main">
+{{ partial "sheet/article.html" . }}
+</main>
+{{ partial "sheet/footer.html" . }}
+</div>
+<div class="tail" aria-hidden="true"></div>
+{{- $js := resources.Get "js/about.js" | minify | fingerprint }}
+<script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
+{{- end }}

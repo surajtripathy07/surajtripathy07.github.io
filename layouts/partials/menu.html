@@ -1,0 +1,8 @@
+{{- /* Fixed top-right menu: works without JS (details), assets/js/menu.js adds Escape, outside click, link click. */ -}}
+<details class="menu" id="menu">
+<summary aria-label="Menu"><svg class="mi bars" viewBox="0 0 28 28" aria-hidden="true" focusable="false"><path d="M4.5 8.6C9 7.4 15 8.2 23.6 7.2" stroke="#efe9d8"/><path d="M4 14.4C10 15.4 16 13.6 24 14.8" stroke="#c79a35"/><path d="M5 20.2C11 19.2 17 20.8 22.6 19.6" stroke="#efe9d8"/></svg><svg class="mi cross" viewBox="0 0 28 28" aria-hidden="true" focusable="false"><path d="M7.4 7.2C11 11 16 16.4 21 21" stroke="#efe9d8"/><path d="M21 7C17 11.4 12 16 7 21.2" stroke="#c79a35"/></svg></summary>
+<div class="mpanel"><nav aria-label="Site menu">
+<ul>
+{{ partial "nav-list.html" . }}</ul>
+</nav></div>
+</details>

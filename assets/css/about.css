@@ -1,0 +1,57 @@
+/* About page: the street scene on top, then the shared chalk sheet. Scene rules only; the sheet is site.css. */
+
+/* home link: a chip in the scene's corner instead of a band above the sheet */
+.band{position:absolute;z-index:20;top:0;left:0;height:auto;max-width:none;margin:0;padding:.75rem 0 0 .75rem}
+.band .home{margin-left:0;padding:0 .9rem;background:var(--deep);border-radius:3px;text-shadow:none}
+@media (min-width:56rem){.band{padding:1.1rem 0 0 1.6rem}}
+
+/* the scene: one still street, lit by the hour */
+.scene{position:relative;z-index:3;height:58vh;height:58svh;min-height:360px;overflow:hidden;clip-path:var(--cutb);-webkit-clip-path:var(--cutb);
+  --glass:#b9d2e3;--wd:#6a5646;--pud:#b9d6e6;--bulb:#d9d2c0;--haze:#d9c8c2}
+@media (min-width:700px){.scene{height:62vh;height:62svh}}
+.scene::after{content:"";position:absolute;inset:0;z-index:5;pointer-events:none;opacity:.45;mix-blend-mode:multiply;background:url(../img/grain.png) 0 0/192px 192px}
+.sv{position:absolute;inset:0;width:100%;height:100%;display:block}
+.sv-w{display:none}
+@media (min-width:700px) and (min-aspect-ratio:1/1){.sv-p{display:none}.sv-w{display:block}}
+.gl{fill:var(--glass)}
+.wd{fill:var(--wd)}
+.pud{fill:var(--pud);opacity:.85}
+.bb{fill:var(--bulb)}
+.hzs{stop-color:var(--haze)}
+
+/* states: one SVG, the classes below switch the lights */
+.scene[data-s="dusk"]{--glass:#707ca6;--wd:#e8a95a;--pud:#c79ca4;--bulb:#ffd37a;--haze:#c89aa6}
+.scene[data-s="night"]{--glass:#1c2247;--wd:#f1c15e;--pud:#2b386f;--bulb:#ffd37a;--haze:#2f3466}
+.sd,.sk,.sn,.dim,.L,.t1,.t2,.stars,.sunG,.moonG,.wsh,.cl{opacity:0}
+.scene[data-s="day"] .sd{opacity:1}
+.scene[data-s="dusk"] .sk{opacity:1}
+.scene[data-s="night"] .sn{opacity:1}
+.scene[data-s="day"] .cl{opacity:1}
+.scene[data-s="day"] .sunG{opacity:1}
+.scene[data-s="day"] .wsh{opacity:.6}
+.scene[data-s="dusk"] .dim{opacity:.22}
+.scene[data-s="night"] .dim{opacity:.5}
+.scene[data-s="dusk"] .L{opacity:.8}
+.scene[data-s="night"] .L{opacity:1}
+.scene[data-s="dusk"] .t1{opacity:.9}
+.scene[data-s="night"] .t1,.scene[data-s="night"] .t2{opacity:1}
+.scene[data-s="night"] .stars,.scene[data-s="night"] .moonG{opacity:1}
+.scene[data-s="dusk"] .stars{opacity:.35}
+.sd,.sk,.sn,.dim,.L,.t1,.t2,.stars,.sunG,.moonG,.wsh,.cl,.gl,.wd,.pud,.bb,.hzs{transition:opacity .6s ease,fill .6s ease,stop-color .6s ease}
+
+/* time control */
+.tod{position:absolute;z-index:15;top:10px;right:10px;display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+@media (min-width:56rem){.tod{top:16px;right:22px}}
+.seg{display:flex;gap:2px;padding:3px;background:rgba(14,22,26,.86);border-radius:999px}
+.seg button{min-width:var(--tap);min-height:var(--tap);padding:0 .85rem;border:0;border-radius:999px;background:transparent;color:var(--chalk);font:600 .9375rem/1 var(--sans);cursor:pointer}
+.seg button:hover{background:rgba(239,233,216,.16)}
+.seg button[aria-pressed="true"]{background:var(--chalk);color:#14201a}
+.seg button:focus-visible{outline:3px solid #ffd37a;outline-offset:-3px;box-shadow:inset 0 0 0 5px #14201a}
+.nowtime{margin:0;padding:3px 10px;border-radius:999px;background:rgba(14,22,26,.86);color:var(--chalk);font:500 .8125rem/1.3 var(--sans)}
+.nowtime[hidden]{display:none}
+
+/* the shared sheet starts a little over the scene's torn edge */
+.scene+.sheet{margin-top:-1.25rem;z-index:4}
+@media (prefers-reduced-motion:reduce){
+  .sd,.sk,.sn,.dim,.L,.t1,.t2,.stars,.sunG,.moonG,.wsh,.cl,.gl,.wd,.pud,.bb,.hzs{transition:none}
+}
