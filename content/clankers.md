@@ -44,6 +44,10 @@ ledgers:
       kind: self
       desc: >-
         Sally is our sales agent. She does the selling, working to fill empty beds. She can't mark a bed sold; only a separate reconcile step can. Her messages go out only after approval, checked every minute.
+tokens:
+  count: "11 billion+"
+  label: "tokens through AI models since 17 September 2026"
+  note: "As of 9 November 2026, counted from my local logs for Claude Code, opencode and Copilot CLI. Over 90% of it is models re-reading context from cache, which is where the maxing happens."
 ---
 
 ## In four words
@@ -89,6 +93,10 @@ stop-slop, web-design-guidelines, frontend-design, impeccable.
 ### Hooks
 
 A read cap that keeps the thinking model's context small, session hooks that feed Membral, and a status line.
+
+## Tokens burned
+
+{{< tokens >}}
 
 ## Membral, the memory
 

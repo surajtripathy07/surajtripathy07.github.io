@@ -1,0 +1,10 @@
+{{- /* Token count figure; values from front matter tokens: {count, label, note}. The meme partial is optional. */ -}}
+{{- with .Page.Params.tokens -}}
+<div class="tokens">
+<p class="tokens-fig"><span class="tokens-count">{{ .count }}</span> <span class="tokens-label">{{ .label }}</span></p>
+<p class="tokens-note">{{ .note }}</p>
+{{- if templates.Exists "partials/art/meme-tokens.html" }}
+<figure class="tokens-meme">{{ partial "art/meme-tokens.html" $.Page }}</figure>
+{{- end }}
+</div>
+{{- end -}}

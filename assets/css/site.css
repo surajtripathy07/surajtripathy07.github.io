@@ -71,6 +71,17 @@ p{margin:0 0 var(--s2)}
 .key i{display:block;width:.9rem;height:.35rem;border-radius:1px;transform:rotate(-8deg)}
 .key .t{font-variant-numeric:tabular-nums;font-weight:700}
 
+/* ---------- tokens burned: big count, label, note, meme ---------- */
+.tokens{margin:var(--s2) 0 var(--s1)}
+.tokens-fig{margin:0}
+.tokens-count{display:block;font:400 clamp(2.75rem,17vw,5.5rem)/1 var(--serif);color:var(--ver-text);overflow-wrap:anywhere}
+.tokens-label{display:block;margin-top:var(--s1);font:400 1.25rem/1.35 var(--serif)}
+.tokens-note{margin:var(--s1) 0 0;font-size:var(--fs-small);line-height:1.5;color:var(--soft);max-width:38em}
+.tokens-meme{margin:var(--s3) 0 0;width:100%}
+.tokens-meme svg,.tokens-meme img{display:block;width:100%;height:auto}
+.meme-tk{display:block;max-width:34rem;margin-inline:auto}
+.meme-tk-p{width:100%;height:auto;display:block}
+
 .close{margin:var(--s5) 0 var(--s2);font:400 1.25rem/1.4 var(--serif)}
 .close a{display:inline-block;padding:.5rem 0;overflow-wrap:anywhere}
 
