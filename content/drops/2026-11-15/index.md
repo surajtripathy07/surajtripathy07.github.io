@@ -4,7 +4,7 @@ description: "Every agent command stalled about 240 seconds because a status hoo
 date: 2026-11-15T21:00:00+05:30
 tags: ["debugging", "macos", "ai-agents", "terminal"]
 images: ["cover.png"]
-draft: false
+draft: true
 ---
 
 ![](cover.png)

@@ -4,7 +4,7 @@ description: "A 2-hour hold and a 12-hour payment check could sell the same bed 
 date: 2026-11-12T21:00:00+05:30
 tags: ["sally", "state-machines", "timeouts", "design-review", "booking"]
 images: ["cover.png"]
-draft: false
+draft: true
 ---
 
 ![](cover.png)
