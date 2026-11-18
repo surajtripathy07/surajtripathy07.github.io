@@ -154,6 +154,8 @@ p{margin:0 0 var(--s2)}
 .prose .highlight{max-width:100%;overflow:hidden}
 .prose pre{max-width:100%;tab-size:2}
 .prose img{border:1px solid rgba(18,21,18,.25)}
+.prose figure.loop{margin:var(--s3) 0}
+.prose figure.loop video{display:block;width:100%;height:auto;aspect-ratio:1200/676;background:var(--deep);border:1px solid rgba(18,21,18,.25)}
 .prose .mermaid{margin:var(--s3) 0;overflow-x:auto;text-align:center}
 .prose .mermaid svg{min-width:34rem;max-width:none!important;height:auto}
 @media (min-width:52rem){.prose .mermaid svg{min-width:0;max-width:100%!important}}

@@ -5,7 +5,11 @@ date: 2026-11-18
 draft: true
 ---
 
+{{< loop src="summary" label="A looping summary: three quiet vector search failures, every save downloading every lesson, a search that never says nothing found, and a retry job that retired good rows." >}}
+
 On Nov 2, one of my apps pushed about 2.5 GB of data out of my database in a single day. My hosted plan charges for that, and the free quota was gone.
+
+![This is fine: "Vector search: 0 errors, results look plausible" / "Database: 2.5 GB pushed out in one day"](meme-hook.png)
 
 The app was [Membral](https://github.com/surajtripathy07/membral), a tool I build that saves your AI coding sessions so you can search them later. The cause was not a crash or a bad query result. It was a design choice that only costs money at scale.
 
@@ -14,6 +18,8 @@ That turned out to be the pattern for the three bugs in this post. A vector sear
 A quick glossary, since the rest depends on it. An embedding is a list of numbers that captures what a piece of text means; texts with similar meaning get similar lists. A vector search compares those lists and returns the closest ones. pgvector is the Postgres extension that lets the database do that comparison itself.
 
 ## Every save downloaded every lesson
+
+![Drake: "Pull every lesson to the app to find a few matches" / "Ask pgvector for the nearest few rows"](meme-1.png)
 
 When Membral saves a new lesson from a session, it first checks for near-duplicates by comparing embeddings. That comparison ran in my app code, not in the database. So each save job pulled every stored lesson in the project down to the app, twice, at about 19.4 KB each.
 
@@ -29,6 +35,8 @@ The fix is one query. Postgres with pgvector can rank every stored vector agains
 
 ## Search never says nothing found
 
+![Pawn Stars best I can do: "Anything in my notes about a topic I never discussed?" / "Best I can do is the closest match, take it or leave it"](meme-2.png)
+
 Ask a keyword search for a word that isn't in your documents and you get an empty list. Ask a meaning-based search about something you never discussed and it still hands back the closest match, however far off. Closest is all it knows how to compute.
 
 So you need a cut-off: a minimum closeness score, from 0 to 1, that a result must reach before it is shown. I tested candidate cut-offs against 6 questions that have no true answer in my history. For each of those, the right result was an empty list.
@@ -42,6 +50,8 @@ The embedding model matters here too. Membral uses a small embedding model, nomi
 ([The short version.](https://surajtripathi.info/drops/2026-11-03/))
 
 ## A retry job that retired good rows
+
+![Sleeping Shaq: "One chunk fails with a definitive 4xx: retire it" / "Server has one bad minute: retire 32 good rows forever"](meme-3.png)
 
 To make text searchable, that local model turns each saved chunk into a vector. Sometimes that step fails, so a retry job tries the chunk again later.
 

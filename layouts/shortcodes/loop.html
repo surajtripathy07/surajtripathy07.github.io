@@ -1,0 +1,15 @@
+{{- /* {{< loop src="summary" label="what the animation shows" >}}: silent looping summary from the page bundle (src.webm, src.mp4, src.gif, src-poster.png). */ -}}
+{{- $src := .Get "src" | default "summary" -}}
+{{- $label := .Get "label" -}}
+{{- $page := .Page -}}
+{{- $poster := $page.Resources.Get (printf "%s-poster.png" $src) -}}
+{{- $webm := $page.Resources.Get (printf "%s.webm" $src) -}}
+{{- $mp4 := $page.Resources.Get (printf "%s.mp4" $src) -}}
+{{- $gif := $page.Resources.Get (printf "%s.gif" $src) -}}
+<figure class="loop">
+<video autoplay muted loop playsinline preload="metadata"{{ with $poster }} poster="{{ .RelPermalink }}"{{ end }}{{ with $label }} aria-label="{{ . }}"{{ end }}>
+{{- with $webm }}<source src="{{ .RelPermalink }}" type="video/webm">{{ end }}
+{{- with $mp4 }}<source src="{{ .RelPermalink }}" type="video/mp4">{{ end }}
+{{- with $gif }}<a href="{{ .RelPermalink }}">{{ $label | default "Animated summary (GIF)" }}</a>{{ end }}
+</video>
+</figure>
