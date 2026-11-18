@@ -55,7 +55,7 @@ The short version: [My sandbox tests passed for the wrong reason](https://surajt
 
 ## Lock 3: a list of what's allowed doesn't block the rest
 
-![A locked gate alone in an open field: "ON THE LIST" / "EVERYTHING ELSE"](meme-3.png)
+![The yellow gate with no fence: "ON THE LIST" / "EVERYTHING ELSE"](meme-3.png)
 
 The sharpest finding was about the allowed list. It named two helper agent types, `scout` and `Explore`, and I read that as "only these two."
 
