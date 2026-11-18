@@ -1,5 +1,5 @@
 (function(){
-  if(typeof gtag!=='function'||location.hostname!=='surajtripathi.info')return;
+  if(typeof gtag!=='function'||!window.__ga)return;
   var path=location.pathname;
   function send(name,params){params.transport_type='beacon';try{gtag('event',name,params)}catch(e){}}
   function net(host){

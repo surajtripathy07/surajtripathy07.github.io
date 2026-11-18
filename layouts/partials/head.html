@@ -19,7 +19,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;700&family=Young+Serif&display=swap" rel="stylesheet">
 {{- if hugo.IsProduction }}
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-41BV0MG2P3"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}if(location.hostname==='surajtripathi.info'){gtag('js',new Date());gtag('config','G-41BV0MG2P3')}</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}(function(){var q=location.search,o=false;try{if(/[?&]notrack\b/.test(q))localStorage.setItem('notrack','1');if(/[?&]track\b/.test(q))localStorage.removeItem('notrack');o=localStorage.getItem('notrack')==='1'}catch(e){}window.__ga=location.hostname==='surajtripathi.info'&&!o;if(window.__ga){gtag('js',new Date());gtag('config','G-41BV0MG2P3')}})()</script>
 {{- $track := resources.Get "js/track.js" | minify | fingerprint }}
 <script src="{{ $track.RelPermalink }}" integrity="{{ $track.Data.Integrity }}" defer></script>
 {{- end }}
