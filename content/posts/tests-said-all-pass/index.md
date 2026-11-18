@@ -5,11 +5,11 @@ draft: true
 description: "Three times in two weeks, a test of my AI agent's safety layers passed for a reason I had wrong. Here is what each one taught me."
 ---
 
-{{< loop src="summary" label="A looping summary: three memes about tests that passed for the wrong reason, a fake HOME that launchd ignores, three locks that hide each other, and an allow list that does not exclude anything." >}}
+{{< loop src="summary" label="A looping summary: an AI works inside a locked room, every lock test passes, and three memes show why each pass meant less than it seemed, ending on a locked gate standing alone in an open field." >}}
 
 The test script ended with `ALL PASS`, and I almost believed it.
 
-![Anakin and Padme 4-panel: "All four escape tests say ALL PASS" / "So all three sandbox layers work?" / "Not just the first lock holding... right?"](meme-hook.png)
+![Panik Kalm Panik: "Are the locks working?" / "Every test passed" / "Why did each one pass?"](meme-hook.png)
 
 I am building Foreman, a scheduled job that starts Claude with no chat window, twice a day, at 02:00 and 15:00. It reads my repos, and it may write only cards (short decisions for me to approve), drafts and a journal inside its own folder. Nobody watches it run, so the limits on what it can touch are the whole product.
 
@@ -23,7 +23,7 @@ Over two weeks I got this wrong in three separate ways. Each one looked differen
 
 ## A fake home folder doesn't fool the operating system
 
-![Woman yelling at cat: "I pointed HOME at a temp folder, you're sandboxed!" / "launchd, which has never read HOME"](meme-1.png)
+![This Is Fine: "Lock 1 hid my files" / "Programs keep running"](meme-1.png)
 
 This one came first, on 7 November, and it wasn't about Foreman. It was about the installer for [Membral](https://github.com/surajtripathy07/membral), the tool I build that saves my AI coding sessions so I can search them later.
 
@@ -37,7 +37,7 @@ The short version: [Faking HOME didn't sandbox my installer](https://surajtripat
 
 ## The three locks, one at a time
 
-![Is this a pigeon: "My sandbox test" / "Model politely declining on its own" / "Is this enforcement?"](meme-2.png)
+![Sad Pablo Escobar: "Safety lock ready to act" / "AI already said no"](meme-2.png)
 
 Foreman's locks are these:
 
@@ -55,7 +55,7 @@ The short version: [My sandbox tests passed for the wrong reason](https://surajt
 
 ## An allow list is not a deny list
 
-![Always has been: "Wait, the allow list never blocked the others?" / "Always has been"](meme-3.png)
+![A locked gate alone in an open field: "ON THE LIST" / "EVERYTHING ELSE"](meme-3.png)
 
 The sharpest finding was about the allow list. It named two helper agent types, `scout` and `Explore`, and I read that as "only these two."
 
