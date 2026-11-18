@@ -1,5 +1,6 @@
 ---
 title: "My build quietly downloaded its fonts"
+description: "A Docker build quietly downloaded fonts from Google, so I switched to local fonts and proved the build works with the network cut off."
 date: 2026-11-10T21:00:00+05:30
 tags: ["nextjs", "docker", "self-hosting", "membral"]
 images: ["cover.png"]

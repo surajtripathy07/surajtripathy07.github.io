@@ -1,5 +1,6 @@
 ---
 title: "Allowing two helpers didn't forbid the rest"
+description: "An allow list naming two helper agents didn't block the others, so I added explicit deny rules for each helper type I don't want."
 date: 2026-11-16T21:00:00+05:30
 tags: ["ai-agents", "permissions", "security", "claude-code"]
 images: ["cover.png"]

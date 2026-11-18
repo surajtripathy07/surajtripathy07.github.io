@@ -1,5 +1,6 @@
 ---
 title: "One deadline doing two jobs"
+description: "A flaky test failed because one 200 ms deadline did two jobs, and the fix freezes the test's fake clock instead of tuning timing."
 date: 2026-11-06T21:00:00+05:30
 tags: ["testing", "flaky-tests", "membral"]
 images: ["cover.png"]

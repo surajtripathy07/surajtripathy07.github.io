@@ -1,5 +1,6 @@
 ---
 title: "Two sensible timers could sell a bed twice"
+description: "A 2-hour hold and a 12-hour payment check could sell the same bed twice, and an adversarial AI review caught it before any code shipped."
 date: 2026-11-12T21:00:00+05:30
 tags: ["sally", "state-machines", "timeouts", "design-review", "booking"]
 images: ["cover.png"]

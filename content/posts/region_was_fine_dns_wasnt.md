@@ -1,5 +1,6 @@
 ---
 title: The Region Was Fine, DNS Wasn't
+description: "One region's devices stopped connecting because DNS stopped resolving their TURN servers, and an automated cleanup loop made the incident worse."
 date: "2026-07-02"
 ---
 

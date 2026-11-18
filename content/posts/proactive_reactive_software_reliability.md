@@ -1,5 +1,6 @@
 ---
 title: Proactive vs. Reactive Software Reliability
+description: "Why reactive fixes only buy a temporary reprieve, and how watching the right technical and domain-specific metrics lets you anticipate problems."
 date: "2023-08-17"
 ---
 

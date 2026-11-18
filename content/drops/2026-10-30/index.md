@@ -1,5 +1,6 @@
 ---
 title: "A retry job that retired good rows"
+description: "A retry job gave up on a saved chunk forever after one failure, so a brief model-server outage could have left 32 good rows unsearchable for good."
 date: 2026-10-30T21:00:00+05:30
 tags: ["membral", "retries", "bugs"]
 images: ["cover.png"]

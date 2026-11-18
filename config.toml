@@ -3,6 +3,7 @@ title = "Suraj Tripathi"
 locale = "en"
 defaultcontentlanguage = "en"
 enableEmoji=true
+enableRobotsTXT = true
 
 [markup.highlight]
 style = "github-dark"

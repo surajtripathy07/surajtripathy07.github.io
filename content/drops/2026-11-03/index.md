@@ -1,5 +1,6 @@
 ---
 title: "Teaching my search to say nothing found"
+description: "Meaning-based search never says nothing found by itself, so I tested cut-off scores against 6 questions with no true answer; for raw chat only 0.68 passed."
 date: 2026-11-03T21:00:00+05:30
 tags: ["membral", "search", "embeddings", "measurement"]
 images: ["cover.png"]

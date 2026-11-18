@@ -1,5 +1,6 @@
 ---
 title: "When a video is too long to shrink"
+description: "WhatsApp won't deliver a video over 16 MB, so I built an owner-only upload page that re-encodes clips with ffmpeg to the sharpest quality that fits."
 date: 2026-11-05T21:00:00+05:30
 tags: ["video", "whatsapp", "ffmpeg", "sally"]
 images: ["cover.png"]

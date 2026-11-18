@@ -1,5 +1,6 @@
 ---
 title: "Five Google accounts froze my app's sign-in"
+description: "Google sign-in spun forever on a phone with five accounts because the account picker's data went over Android's message size limit."
 date: 2026-11-02T21:00:00+05:30
 tags: ["android", "debugging", "auth", "silent-failures"]
 images: ["cover.png"]

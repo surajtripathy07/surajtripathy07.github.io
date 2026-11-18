@@ -1,5 +1,6 @@
 ---
 title: "Each save downloaded every saved lesson"
+description: "Each save job downloaded every stored lesson to check for near-duplicates, about 79 MB at 2,000 lessons; one pgvector query returns only the few needed."
 date: 2026-11-04T21:00:00+05:30
 tags: ["membral", "postgres", "pgvector", "egress", "performance"]
 images: ["cover.png"]

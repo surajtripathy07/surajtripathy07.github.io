@@ -1,5 +1,6 @@
 ---
 title: "Faking HOME didn't sandbox my installer"
+description: "Pointing HOME at a temp folder didn't sandbox an installer that registers a launchd job under my real account, so tests now get their own Docker project."
 date: 2026-11-07T21:00:00+05:30
 tags: ["membral", "macos", "launchd", "testing", "sandboxing"]
 images: ["cover.png"]

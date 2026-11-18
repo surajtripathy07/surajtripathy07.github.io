@@ -1,5 +1,6 @@
 ---
 title: About
+description: "I'm a generalist engineer who now builds by directing AI agents, and I also run Staytion, a paying-guest coliving business in Mumbai."
 layout: about
 ---
 

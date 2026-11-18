@@ -231,3 +231,6 @@ li:hover .dab.wet .sh2,li:focus-within .dab.wet .sh2{opacity:.55}
 /* ---------- menu chip: pinned to the sheet's top-right corner so the name keeps its full width ---------- */
 .sheet>.inner{position:relative}
 .menu{position:absolute;float:none;top:6px;right:0;margin:0}
+
+/* ---------- privacy note (footer) ---------- */
+.privacy{margin:8px 0 0;font-size:14px;line-height:1.5;color:var(--soft)}

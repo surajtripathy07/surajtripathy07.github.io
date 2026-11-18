@@ -11,10 +11,15 @@
 {{- end }}
 {{ template "_internal/opengraph.html" . }}
 {{ template "_internal/twitter_cards.html" . }}
+{{- if or .IsHome (eq .Params.layout "about") }}
+{{ partial "person-ld.html" . }}
+{{- end }}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;700&family=Young+Serif&display=swap" rel="stylesheet">
 {{- if hugo.IsProduction }}
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-41BV0MG2P3"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-41BV0MG2P3');</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}if(location.hostname==='surajtripathi.info'){gtag('js',new Date());gtag('config','G-41BV0MG2P3')}</script>
+{{- $track := resources.Get "js/track.js" | minify | fingerprint }}
+<script src="{{ $track.RelPermalink }}" integrity="{{ $track.Data.Integrity }}" defer></script>
 {{- end }}

@@ -1,5 +1,6 @@
 ---
 title: "Five Months on WhatsApp Before I Wrote a Line of Code"
+description: "How Staytion ran for about five months on WhatsApp before any app existed, and how the admin app grew from whichever chore annoyed me most that week."
 date: "2026-07-03"
 ---
 

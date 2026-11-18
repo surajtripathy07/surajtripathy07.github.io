@@ -1,5 +1,6 @@
 ---
 title: "My sandbox tests passed for the wrong reason"
+description: "My sandbox escape tests passed with all three locks on, so I turned the locks off one at a time to see which one was actually refusing."
 date: 2026-11-14T21:00:00+05:30
 tags: ["agents", "sandboxing", "testing", "security"]
 images: ["cover.png"]

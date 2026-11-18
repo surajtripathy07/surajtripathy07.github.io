@@ -1,0 +1,5 @@
+{{- /* Person structured data for the home and about pages. Only facts already in config.toml. */ -}}
+{{- $urls := slice -}}
+{{- range sort site.Params.social "weight" }}{{ $urls = $urls | append .url }}{{ end -}}
+{{- $ld := dict "@context" "https://schema.org" "@type" "Person" "name" site.Params.author "url" site.BaseURL "sameAs" $urls -}}
+<script type="application/ld+json">{{ $ld | jsonify | safeJS }}</script>

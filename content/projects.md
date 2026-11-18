@@ -1,5 +1,6 @@
 ---
 title: Projects
+description: "Things I've built end to end, mostly by directing AI coding agents rather than typing every line myself."
 slug: projects
 ---
 
