@@ -19,11 +19,11 @@ Think of it as an AI working in a locked room I built for it. The room has three
 
 A refusal only counts if you know which lock produced it. When three locks sit on one door, the first one to hold hides whether the other two work at all. A pass says nothing bad happened this time. It says nothing about whether I'm protected.
 
-Over two weeks I got this wrong in three separate ways. Each one looked different, and each one had the same root.
+Three tests passed for the wrong reason. Over two weeks I got this wrong in three separate ways. Each one looked different, and each one had the same root.
 
-## Lock 1: a fake home folder hid my files, not my programs
+## Test 1: a fake home folder hid my files, not my programs
 
-![This Is Fine: "Lock 1 hid my files" / "Programs keep running"](meme-1.png)
+![This Is Fine: "Test 1 hid my files" / "Programs keep running"](meme-1.png)
 
 This one came first, on 7 November, and it had nothing to do with Foreman. It was about the installer for [Membral](https://github.com/surajtripathy07/membral), the tool I build that saves my AI coding sessions so I can search them later.
 
@@ -35,7 +35,7 @@ The fix so far is a separate Docker project name for test runs, so their contain
 
 The short version: [Faking HOME didn't sandbox my installer](https://surajtripathi.info/drops/2026-11-07/).
 
-## Lock 2: the AI said no before the lock got a turn
+## Test 2: the AI said no before the lock got a turn
 
 ![Sad Pablo Escobar: "Safety lock ready to act" / "AI already said no"](meme-2.png)
 
@@ -53,7 +53,7 @@ The test script fooled me too. Later, one test failed because it only passes if 
 
 The short version: [My sandbox tests passed for the wrong reason](https://surajtripathi.info/drops/2026-11-14/).
 
-## Lock 3: a list of what's allowed doesn't block the rest
+## Test 3: a list of what's allowed doesn't block the rest
 
 ![The yellow gate with no fence: "ON THE LIST" / "EVERYTHING ELSE"](meme-3.png)
 
